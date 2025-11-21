@@ -53,7 +53,7 @@ class PaymentService {
   async createPaymentOrder(orderData) {
     const sanitizedData = {
       amount: Math.round(parseFloat(orderData.amount) * 100), // Convert to paise
-      currency: SecurityUtils.sanitizeInput(orderData.currency) || 'INR',
+      currency: SecurityUtils.sanitizeInput(orderData.currency) || 'USD',
       bookingId: SecurityUtils.sanitizeInput(orderData.bookingId),
       customerInfo: {
         name: SecurityUtils.sanitizeInput(orderData.customerInfo.name),

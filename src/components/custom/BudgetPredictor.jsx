@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Calculator, TrendingUp, IndianRupee, Users, Calendar } from 'lucide-react';
+import { Calculator, TrendingUp, DollarSign, Users, Calendar } from 'lucide-react';
 import { chatSession } from '@/service/AIModel';
 import { BUDGET_PREDICTOR_PROMPT } from '@/constants/options';
 import { toast } from 'sonner';
@@ -16,11 +16,11 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
 
   useEffect(() => {
     if (destination && days && travelers) {
-      // IMMEDIATE TEST: Set hardcoded realistic values first
+      // IMMEDIATE TEST: Set hardcoded realistic values first in USD
       const testBudget = {
-        budget: 25000,   // ₹25,000 for 2 people, 5 days budget
-        moderate: 60000, // ₹60,000 for 2 people, 5 days moderate  
-        luxury: 140000   // ₹1,40,000 for 2 people, 5 days luxury
+        budget: 300,    // $300 for 2 people, 5 days budget
+        moderate: 750,  // $750 for 2 people, 5 days moderate  
+        luxury: 1800    // $1,800 for 2 people, 5 days luxury
       };
 
       console.log('Setting test budget first:', testBudget);
@@ -72,15 +72,15 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
 
     try {
       // Try to extract budget information from AI response
-      const budgetMatch = response.match(/budget|cost|price|₹|INR/gi);
+      const budgetMatch = response.match(/budget|cost|price|\$|USD/gi);
       if (budgetMatch) {
         // Extract numbers and create budget ranges
-        const numbers = response.match(/₹?[\d,]+/g) || [];
+        const numbers = response.match(/\$?[\d,]+/g) || [];
         if (numbers.length >= 3) {
           return {
-            budget: parseInt(numbers[0].replace(/[₹,]/g, '')),
-            moderate: parseInt(numbers[1].replace(/[₹,]/g, '')),
-            luxury: parseInt(numbers[2].replace(/[₹,]/g, ''))
+            budget: parseInt(numbers[0].replace(/[\$,]/g, '')),
+            moderate: parseInt(numbers[1].replace(/[\$,]/g, '')),
+            luxury: parseInt(numbers[2].replace(/[\$,]/g, ''))
           };
         }
       }
@@ -110,28 +110,28 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
 
     const totalDays = parseInt(days) || 1;
 
-    // Realistic Indian travel costs per person per day (in INR)
+    // Realistic travel costs per person per day (in USD)
     const costPerPersonPerDay = {
       budget: {
-        accommodation: 800,   // Budget hotels/hostels
-        food: 600,           // Local food, street food
-        transport: 400,      // Local transport, buses
-        activities: 500,     // Basic sightseeing
-        miscellaneous: 200   // Shopping, tips, etc.
+        accommodation: 25,   // Budget hotels/hostels
+        food: 20,           // Local food, street food
+        transport: 15,      // Local transport, buses
+        activities: 15,     // Basic sightseeing
+        miscellaneous: 10   // Shopping, tips, etc.
       },
       moderate: {
-        accommodation: 2500,  // 3-star hotels
-        food: 1200,          // Mix of local and restaurants
-        transport: 800,      // Taxis, trains
-        activities: 1000,    // Paid attractions, tours
-        miscellaneous: 500   // Shopping, souvenirs
+        accommodation: 80,  // 3-star hotels
+        food: 40,          // Mix of local and restaurants
+        transport: 25,     // Taxis, trains
+        activities: 30,    // Paid attractions, tours
+        miscellaneous: 15  // Shopping, souvenirs
       },
       luxury: {
-        accommodation: 6000,  // 4-5 star hotels
-        food: 2500,          // Fine dining, room service
-        transport: 2000,     // Private cars, flights
-        activities: 2500,    // Premium experiences
-        miscellaneous: 1000  // Luxury shopping
+        accommodation: 200, // 4-5 star hotels
+        food: 80,          // Fine dining, room service
+        transport: 60,     // Private cars, flights
+        activities: 80,    // Premium experiences
+        miscellaneous: 30  // Luxury shopping
       }
     };
 
@@ -168,12 +168,12 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
   const formatCurrency = (amount) => {
     // Handle NaN or invalid amounts
     if (!amount || isNaN(amount)) {
-      return '₹0';
+      return '$0';
     }
 
-    return new Intl.NumberFormat('en-IN', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'INR',
+      currency: 'USD',
       maximumFractionDigits: 0
     }).format(amount);
   };
@@ -182,7 +182,7 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
     // Handle invalid budget amounts
     const budget = parseInt(totalBudget) || 0;
 
-    // More realistic Indian travel budget breakdown
+    // Realistic travel budget breakdown
     return {
       accommodation: Math.round(budget * 0.35),  // 35% - Hotels/stays
       food: Math.round(budget * 0.25),          // 25% - Meals and dining
@@ -248,12 +248,12 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
             </div>
             <div className="flex flex-col gap-1">
               {isSelected && (
-                <Badge variant="default" className="bg-blue-600 text-white">
+                <Badge variant="default" className="text-white bg-blue-600">
                   Selected
                 </Badge>
               )}
               {isRecommended && !isSelected && (
-                <Badge variant="outline" className="border-orange-400 text-orange-600 bg-orange-100 dark:bg-orange-900/30">
+                <Badge variant="outline" className="text-orange-600 bg-orange-100 border-orange-400 dark:bg-orange-900/30">
                   Recommended
                 </Badge>
               )}
@@ -267,7 +267,7 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
           <p className={`text-xs ${
             isSelected ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'
           }`}>
-            ₹{Math.round(amount / parseInt(days) / (parseInt(travelers?.match(/\d+/)?.[0]) || 1)).toLocaleString()} per person per day
+            ${Math.round(amount / parseInt(days) / (parseInt(travelers?.match(/\d+/)?.[0]) || 1)).toLocaleString()} per person per day
           </p>
         </CardHeader>
         <CardContent>
@@ -344,7 +344,7 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
 
       {budgetPrediction && (
         <>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid gap-4 md:grid-cols-3">
             <BudgetCard
               type="budget"
               amount={budgetPrediction.budget}
@@ -363,9 +363,9 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
           {/* Quick Budget Selection */}
           <Card className="bg-gray-50 dark:bg-gray-800">
             <CardContent className="pt-6">
-              <h4 className="font-semibold mb-3 text-gray-800 dark:text-gray-200">Quick Budget Selection:</h4>
+              <h4 className="mb-3 font-semibold text-gray-800 dark:text-gray-200">Quick Budget Selection:</h4>
               <div className="flex flex-wrap gap-2">
-                {[15000, 25000, 50000, 75000, 100000, 150000].map((amount) => (
+                {[200, 300, 500, 750, 1000, 1500, 2000, 3000].map((amount) => (
                   <Button
                     key={amount}
                     variant={selectedBudgetType === 'quick' && customBudget == amount ? "default" : "outline"}
@@ -377,7 +377,7 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
                     }}
                     className="text-xs"
                   >
-                    ₹{amount.toLocaleString()}
+                    ${amount.toLocaleString()}
                   </Button>
                 ))}
               </div>
@@ -386,9 +386,9 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
         </>
       )}
 
-      <Card className="border-2 border-dashed border-gray-300 dark:border-gray-600">
+      <Card className="border-2 border-gray-300 border-dashed dark:border-gray-600">
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Calculator className="w-5 h-5" />
             Custom Budget
           </CardTitle>
@@ -398,16 +398,16 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
         </CardHeader>
         <CardContent>
           <div className="flex gap-3">
-            <div className="flex-1 relative">
-              <IndianRupee className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <div className="relative flex-1">
+              <DollarSign className="absolute w-4 h-4 text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
               <Input
                 type="number"
-                placeholder="Enter your budget (min ₹1,000)"
+                placeholder="Enter your budget (min $50)"
                 value={customBudget}
                 onChange={(e) => setCustomBudget(e.target.value)}
                 className="pl-10 text-lg font-medium"
-                min="1000"
-                step="1000"
+                min="50"
+                step="50"
               />
             </div>
             <Button
@@ -415,27 +415,27 @@ const BudgetPredictor = ({ destination, days, travelers, onBudgetSelect }) => {
                 setSelectedBudgetType('custom');
                 onBudgetSelect && onBudgetSelect('custom', parseInt(customBudget));
               }}
-              disabled={!customBudget || parseInt(customBudget) < 1000}
+              disabled={!customBudget || parseInt(customBudget) < 50}
               className="px-6"
             >
               Use This Budget
             </Button>
           </div>
-          {customBudget && parseInt(customBudget) >= 1000 && (
-            <div className="mt-4 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border border-green-200 dark:border-green-800">
-              <h4 className="font-semibold mb-3 text-green-800 dark:text-green-200">Budget Breakdown:</h4>
+          {customBudget && parseInt(customBudget) >= 50 && (
+            <div className="p-4 mt-4 border border-green-200 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 dark:border-green-800">
+              <h4 className="mb-3 font-semibold text-green-800 dark:text-green-200">Budget Breakdown:</h4>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 {Object.entries(getBudgetBreakdown(parseInt(customBudget))).map(([key, value]) => (
-                  <div key={key} className="flex justify-between p-2 bg-white/50 dark:bg-gray-800/50 rounded">
-                    <span className="capitalize font-medium text-gray-700 dark:text-gray-300">{key}:</span>
+                  <div key={key} className="flex justify-between p-2 rounded bg-white/50 dark:bg-gray-800/50">
+                    <span className="font-medium text-gray-700 capitalize dark:text-gray-300">{key}:</span>
                     <span className="font-bold text-green-600 dark:text-green-400">{formatCurrency(value)}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-3 pt-3 border-t border-green-200 dark:border-green-700">
+              <div className="pt-3 mt-3 border-t border-green-200 dark:border-green-700">
                 <div className="flex justify-between font-bold text-green-800 dark:text-green-200">
                   <span>Per Person Per Day:</span>
-                  <span>₹{Math.round(parseInt(customBudget) / parseInt(days) / (parseInt(travelers?.match(/\d+/)?.[0]) || 1)).toLocaleString()}</span>
+                  <span>${Math.round(parseInt(customBudget) / parseInt(days) / (parseInt(travelers?.match(/\d+/)?.[0]) || 1)).toLocaleString()}</span>
                 </div>
               </div>
             </div>

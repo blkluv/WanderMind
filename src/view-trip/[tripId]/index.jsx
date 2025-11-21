@@ -71,7 +71,7 @@ function Viewtrip() {
             noofDays: '3',
             traveler: '2 People',
             budget: 'moderate',
-            budgetAmount: 50000
+            budgetAmount: 1500 // USD
           },
           tripData: {
             hotels: [],
@@ -90,7 +90,7 @@ function Viewtrip() {
           noofDays: '3',
           traveler: '2 People',
           budget: 'moderate',
-          budgetAmount: 50000
+          budgetAmount: 1500 // USD
         },
         tripData: {
           hotels: [],
@@ -102,13 +102,13 @@ function Viewtrip() {
     }
   };
 
-  // Function to calculate total estimated budget
+  // Function to calculate total estimated budget in USD
   const calculateTotalBudget = () => {
     let totalBudget = {
       hotelCost: 0,
       activityCost: 0,
       total: 0,
-      currency: '₹',
+      currency: '$', // USD only
       isEstimated: false
     };
 
@@ -117,7 +117,7 @@ function Viewtrip() {
       if (trip?.tripData?.hotels && Array.isArray(trip.tripData.hotels)) {
         trip.tripData.hotels.forEach(hotel => {
           if (hotel.price) {
-            // Extract number from price string (e.g., "₹5000-7000", "$100-150")
+            // Extract number from price string (e.g., "$100-150", "USD 200-300")
             const priceMatch = hotel.price.match(/[\d,]+/g);
             if (priceMatch) {
               const prices = priceMatch.map(p => parseInt(p.replace(/,/g, '')));
@@ -157,32 +157,29 @@ function Viewtrip() {
 
       totalBudget.total = totalBudget.hotelCost + totalBudget.activityCost;
 
-      // Detect currency from prices
-      const firstHotelPrice = trip?.tripData?.hotels?.[0]?.price || '';
-      if (firstHotelPrice.includes('$')) totalBudget.currency = '$';
-      else if (firstHotelPrice.includes('€')) totalBudget.currency = '€';
-      else if (firstHotelPrice.includes('£')) totalBudget.currency = '£';
+      // Force USD currency
+      totalBudget.currency = '$';
 
-      // If no prices found, estimate based on budget range and days
+      // If no prices found, estimate based on budget range and days in USD
       if (totalBudget.total === 0 && trip?.userSelection) {
         totalBudget.isEstimated = true;
         const days = parseInt(trip.userSelection.noofDays) || 3;
         const travelers = trip.userSelection.traveler || '2 People';
         const numTravelers = parseInt(travelers.match(/\d+/)?.[0]) || 2;
         
-        // Use actual budget amount if available
-        let dailyBudget = 4000; // Default moderate
+        // Use actual budget amount if available (assuming USD)
+        let dailyBudget = 150; // Default moderate in USD
         
         if (trip.userSelection.budgetAmount && trip.userSelection.budgetAmount > 0) {
           dailyBudget = trip.userSelection.budgetAmount / days / numTravelers;
         } else if (trip.userSelection.budget) {
           const budgetLower = trip.userSelection.budget.toLowerCase();
           if (budgetLower.includes('cheap') || budgetLower.includes('budget')) {
-            dailyBudget = 2500;
+            dailyBudget = 80; // USD
           } else if (budgetLower.includes('luxury') || budgetLower.includes('expensive')) {
-            dailyBudget = 8000;
+            dailyBudget = 300; // USD
           } else {
-            dailyBudget = 4500; // moderate
+            dailyBudget = 150; // USD moderate
           }
         }
         
@@ -191,7 +188,7 @@ function Viewtrip() {
         totalBudget.total = Math.round(dailyBudget * days * numTravelers);
       }
 
-      console.log('Calculated Budget:', totalBudget);
+      console.log('Calculated Budget (USD):', totalBudget);
 
     } catch (error) {
       console.error('Error calculating budget:', error);
@@ -428,11 +425,11 @@ function Viewtrip() {
         <TabsContent value="copilot" className="mt-6">
           <div className="space-y-6">
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+              <h2 className="flex items-center justify-center gap-2 mb-2 text-2xl font-bold">
                 <Bot className="w-6 h-6 text-purple-600" />
                 AI Copilot - Real-Time Adaptive Assistant
               </h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
                 Your intelligent travel companion that monitors conditions and suggests real-time adjustments
               </p>
             </div>
@@ -510,27 +507,27 @@ function Viewtrip() {
             <div className="text-center">
               <div className="inline-flex items-center gap-2 mb-4">
                 <span className="text-2xl">✨</span>
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h3 className="text-3xl font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
                   Share Your Amazing Trip
                 </h3>
                 <span className="text-2xl">✨</span>
               </div>
-              <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+              <p className="max-w-2xl mx-auto mb-8 text-lg text-gray-600">
                 Let others discover this incredible destination through your experience. 
                 Create lasting memories and inspire fellow travelers!
               </p>
             </div>
 
-            {/* Helper function for budget display */}
+            {/* Helper function for budget display in USD */}
             {(() => {
               const formatShareBudget = (trip) => {
                 const budgetAmount = trip?.userSelection?.budgetAmount;
                 
                 if (budgetAmount && budgetAmount > 0) {
-                  return `₹${parseInt(budgetAmount).toLocaleString()}`;
+                  return `$${parseInt(budgetAmount).toLocaleString()}`;
                 }
                 
-                // Generate realistic amount based on budget type
+                // Generate realistic amount based on budget type in USD
                 const budget = trip?.userSelection?.budget;
                 const days = parseInt(trip?.userSelection?.noofDays) || 3;
                 const travelers = trip?.userSelection?.traveler || '1 Person';
@@ -542,19 +539,19 @@ function Viewtrip() {
                 let estimatedAmount = 0;
                 switch(budget) {
                   case 'budget':
-                    estimatedAmount = days * peopleCount * 2500;
+                    estimatedAmount = days * peopleCount * 80; // USD
                     break;
                   case 'moderate':
-                    estimatedAmount = days * peopleCount * 4500;
+                    estimatedAmount = days * peopleCount * 150; // USD
                     break;
                   case 'luxury':
-                    estimatedAmount = days * peopleCount * 8000;
+                    estimatedAmount = days * peopleCount * 300; // USD
                     break;
                   default:
-                    estimatedAmount = days * peopleCount * 4000;
+                    estimatedAmount = days * peopleCount * 120; // USD
                 }
                 
-                return `₹${estimatedAmount.toLocaleString()}`;
+                return `$${estimatedAmount.toLocaleString()}`;
               };
               
               window.formatShareBudget = formatShareBudget; // Make it available
@@ -562,12 +559,12 @@ function Viewtrip() {
             })()}
 
             {/* Enhanced Shareable Trip Card Preview */}
-            <div ref={tripCardRef} className="relative overflow-hidden bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 text-white rounded-2xl shadow-2xl">
+            <div ref={tripCardRef} className="relative overflow-hidden text-white shadow-2xl bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 rounded-2xl">
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16"></div>
-                <div className="absolute bottom-0 right-0 w-24 h-24 bg-white rounded-full translate-x-12 translate-y-12"></div>
-                <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-white rounded-full"></div>
+                <div className="absolute top-0 left-0 w-32 h-32 -translate-x-16 -translate-y-16 bg-white rounded-full"></div>
+                <div className="absolute bottom-0 right-0 w-24 h-24 translate-x-12 translate-y-12 bg-white rounded-full"></div>
+                <div className="absolute w-16 h-16 bg-white rounded-full top-1/2 right-1/4"></div>
               </div>
               
               {/* Content */}
@@ -577,11 +574,11 @@ function Viewtrip() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-                      <span className="text-xs font-medium uppercase tracking-wider opacity-90">
+                      <span className="text-xs font-medium tracking-wider uppercase opacity-90">
                         Travel Experience
                       </span>
                     </div>
-                    <h4 className="text-2xl font-bold leading-tight mb-2">
+                    <h4 className="mb-2 text-2xl font-bold leading-tight">
                       {trip?.userSelection?.location?.label || 'Amazing Destination'}
                     </h4>
                     <div className="flex items-center gap-4 text-sm opacity-90">
@@ -596,7 +593,7 @@ function Viewtrip() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl mb-1">✈️</div>
+                    <div className="mb-1 text-3xl">✈️</div>
                     <div className="text-xs font-bold tracking-wider">
                       WANDER<span className="text-yellow-300">MIND</span>
                     </div>
@@ -605,24 +602,24 @@ function Viewtrip() {
                 
                 {/* Trip Details Grid */}
                 <div className="grid grid-cols-2 gap-6 mb-6">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="p-4 border bg-white/10 backdrop-blur-sm rounded-xl border-white/20">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-lg">💰</span>
-                      <span className="text-xs font-medium uppercase tracking-wide opacity-75">Budget</span>
+                      <DollarSign className="w-4 h-4" />
+                      <span className="text-xs font-medium tracking-wide uppercase opacity-75">Budget</span>
                     </div>
-                    <p className="font-bold text-lg capitalize">
+                    <p className="text-lg font-bold capitalize">
                       {trip?.userSelection?.budget === 'budget' ? 'Budget Travel' :
                        trip?.userSelection?.budget === 'moderate' ? 'Comfortable' :
                        trip?.userSelection?.budget === 'luxury' ? 'Luxury' :
                        trip?.userSelection?.budget || 'Moderate'}
                     </p>
                   </div>
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                  <div className="p-4 border bg-white/10 backdrop-blur-sm rounded-xl border-white/20">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-lg">🤖</span>
-                      <span className="text-xs font-medium uppercase tracking-wide opacity-75">Trip Style</span>
+                      <span className="text-xs font-medium tracking-wide uppercase opacity-75">Trip Style</span>
                     </div>
-                    <p className="font-bold text-lg">AI-Optimized</p>
+                    <p className="text-lg font-bold">AI-Optimized</p>
                   </div>
                 </div>
 
@@ -638,8 +635,8 @@ function Viewtrip() {
                       AI-Powered
                     </span>
                     <span className="flex items-center gap-1 opacity-75">
-                      <span>⚡</span>
-                      Smart Planning
+                      <DollarSign className="w-3 h-3" />
+                      USD Pricing
                     </span>
                   </div>
                   <div className="text-xs opacity-75">
@@ -650,9 +647,9 @@ function Viewtrip() {
             </div>
 
             {/* Enhanced Share Options */}
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid gap-6 md:grid-cols-3">
               <Button 
-                className="h-20 flex flex-col items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white border-0 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="flex flex-col items-center justify-center h-20 gap-3 text-white transition-all duration-300 transform border-0 shadow-lg bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl hover:shadow-xl hover:scale-105"
                 onClick={handleDownloadPDF}
               >
                 <Download className="w-6 h-6" />
@@ -663,7 +660,7 @@ function Viewtrip() {
               </Button>
               <Button 
                 variant="outline" 
-                className="h-20 flex flex-col items-center justify-center gap-3 border-2 border-purple-200 hover:border-purple-300 bg-white hover:bg-purple-50 text-purple-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="flex flex-col items-center justify-center h-20 gap-3 text-purple-700 transition-all duration-300 transform bg-white border-2 border-purple-200 shadow-lg hover:border-purple-300 hover:bg-purple-50 rounded-xl hover:shadow-xl hover:scale-105"
                 onClick={handleShareLink}
               >
                 <Share2 className="w-6 h-6" />
@@ -674,7 +671,7 @@ function Viewtrip() {
               </Button>
               <Button 
                 variant="outline" 
-                className="h-20 flex flex-col items-center justify-center gap-3 border-2 border-pink-200 hover:border-pink-300 bg-white hover:bg-pink-50 text-pink-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="flex flex-col items-center justify-center h-20 gap-3 text-pink-700 transition-all duration-300 transform bg-white border-2 border-pink-200 shadow-lg hover:border-pink-300 hover:bg-pink-50 rounded-xl hover:shadow-xl hover:scale-105"
                 onClick={handleShowQRCode}
               >
                 <div className="text-2xl">📱</div>
@@ -687,12 +684,12 @@ function Viewtrip() {
 
             {/* Enhanced QR Code Display */}
             {showQRCode && (
-              <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-gray-200 shadow-xl">
-                <div className="text-center mb-6">
-                  <h4 className="text-xl font-bold text-gray-800 mb-2">Scan to View Trip</h4>
+              <div className="flex flex-col items-center justify-center p-8 border-2 border-gray-200 shadow-xl bg-gradient-to-br from-gray-50 to-white rounded-2xl">
+                <div className="mb-6 text-center">
+                  <h4 className="mb-2 text-xl font-bold text-gray-800">Scan to View Trip</h4>
                   <p className="text-sm text-gray-600">Share this QR code with friends and family</p>
                 </div>
-                <div className="bg-white p-6 rounded-2xl shadow-lg border-4 border-gray-100">
+                <div className="p-6 bg-white border-4 border-gray-100 shadow-lg rounded-2xl">
                   <QRCodeSVG 
                     id="trip-qr-code"
                     value={`${window.location.origin}/view-trip/${tripId}`}
@@ -701,7 +698,7 @@ function Viewtrip() {
                     includeMargin={true}
                   />
                 </div>
-                <p className="text-sm text-gray-600 mt-4 text-center">
+                <p className="mt-4 text-sm text-center text-gray-600">
                   Scan this QR code to view the trip on any device
                 </p>
                 <Button 
@@ -770,19 +767,19 @@ function Viewtrip() {
             </div>
           </div>
 
-          {/* Total Estimated Budget */}
+          {/* Total Estimated Budget in USD */}
           {(() => {
             const budget = calculateTotalBudget();
             return (
               <div style={{ marginBottom: '30px', backgroundColor: '#dcfce7', padding: '20px', borderRadius: '8px', border: '2px solid #10b981' }}>
                 <h2 style={{ fontSize: '22px', fontWeight: 'bold', color: '#065f46', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  💵 {budget.isEstimated ? 'Estimated Budget Range' : 'Total Estimated Budget'}
+                  💵 {budget.isEstimated ? 'Estimated Budget Range' : 'Total Estimated Budget'} (USD)
                 </h2>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
                   <div style={{ backgroundColor: '#ffffff', padding: '15px', borderRadius: '8px', border: '1px solid #10b981' }}>
                     <div style={{ fontSize: '13px', color: '#047857', marginBottom: '6px', fontWeight: '500' }}>🏨 Hotels</div>
                     <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#065f46' }}>
-                      {budget.currency}{Math.round(budget.hotelCost).toLocaleString()}
+                      ${Math.round(budget.hotelCost).toLocaleString()}
                     </div>
                     <div style={{ fontSize: '11px', color: '#6b7280', marginTop: '4px' }}>
                       For {trip?.userSelection?.noofDays || 0} nights
@@ -791,7 +788,7 @@ function Viewtrip() {
                   <div style={{ backgroundColor: '#ffffff', padding: '15px', borderRadius: '8px', border: '1px solid #10b981' }}>
                     <div style={{ fontSize: '13px', color: '#047857', marginBottom: '6px', fontWeight: '500' }}>🎫 Activities & Food</div>
                     <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#065f46' }}>
-                      {budget.currency}{Math.round(budget.activityCost).toLocaleString()}
+                      ${Math.round(budget.activityCost).toLocaleString()}
                     </div>
                     <div style={{ fontSize: '11px', color: '#6b7280', marginTop: '4px' }}>
                       Entry fees, tours & meals
@@ -800,7 +797,7 @@ function Viewtrip() {
                   <div style={{ backgroundColor: '#10b981', padding: '15px', borderRadius: '8px' }}>
                     <div style={{ fontSize: '13px', color: '#ffffff', marginBottom: '6px', fontWeight: '500', opacity: '0.9' }}>💰 Total {budget.isEstimated ? 'Estimated' : ''}</div>
                     <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ffffff' }}>
-                      {budget.currency}{Math.round(budget.total).toLocaleString()}
+                      ${Math.round(budget.total).toLocaleString()}
                     </div>
                     <div style={{ fontSize: '11px', color: '#ffffff', marginTop: '4px', opacity: '0.8' }}>
                       {budget.isEstimated ? 'Based on budget range' : 'Approximate cost'}
@@ -811,7 +808,7 @@ function Viewtrip() {
                   <div style={{ fontSize: '12px', color: budget.isEstimated ? '#92400e' : '#3730a3', lineHeight: '1.6' }}>
                     <strong>Note:</strong> {budget.isEstimated ? 
                       `This is an estimated budget based on your "${trip?.userSelection?.budget}" budget preference for ${trip?.userSelection?.noofDays} days. Actual costs may vary based on hotels, activities, food choices, and transportation.` :
-                      `This budget is calculated from hotel prices and activity costs in your itinerary. Consider additional expenses like transportation (${budget.currency}${Math.round(budget.total * 0.15).toLocaleString()} approx) and shopping.`
+                      `This budget is calculated from hotel prices and activity costs in your itinerary. Consider additional expenses like transportation ($${Math.round(budget.total * 0.15).toLocaleString()} approx) and shopping.`
                     }
                   </div>
                 </div>
@@ -871,7 +868,7 @@ function Viewtrip() {
           {trip?.tripData?.budgetBreakdown && (
             <div style={{ marginBottom: '30px', backgroundColor: '#d1fae5', padding: '20px', borderRadius: '8px', border: '1px solid #10b981' }}>
               <h2 style={{ fontSize: '20px', fontWeight: 'bold', color: '#065f46', marginBottom: '12px' }}>
-                💵 Estimated Budget Breakdown
+                💵 Estimated Budget Breakdown (USD)
               </h2>
               <div style={{ fontSize: '14px', color: '#047857' }}>
                 {trip.tripData.budgetBreakdown}
@@ -905,7 +902,7 @@ function Viewtrip() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '10px' }}>
                     {hotel.price && (
                       <div style={{ fontSize: '14px', color: '#059669', fontWeight: '600' }}>
-                        💰 Price: {hotel.price}
+                        💰 Price: {hotel.price.includes('$') ? hotel.price : `$${hotel.price}`}
                       </div>
                     )}
                     {hotel.geoCoordinates && (
@@ -965,7 +962,7 @@ function Viewtrip() {
                                   )}
                                   {place.ticketPricing && (
                                     <div style={{ fontSize: '12px', color: '#6b7280', backgroundColor: '#f3f4f6', padding: '6px 10px', borderRadius: '4px' }}>
-                                      🎫 Ticket: {place.ticketPricing}
+                                      🎫 Ticket: {place.ticketPricing.includes('$') ? place.ticketPricing : `$${place.ticketPricing}`}
                                     </div>
                                   )}
                                   {place.timeToVisit && (
