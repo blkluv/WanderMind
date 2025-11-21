@@ -43,7 +43,7 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
       directions: "Where would you like to go?",
       food: "What type of food would you like to try?",
       emergency: "Emergency contacts and important numbers",
-      thank_you: "Thank you for using WanderMind!",
+      thank_you: "Thank you for using IRL.TRAVEL!",
       help: "Need help? Ask me anything about your trip."
     },
     hi: {
@@ -51,7 +51,7 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
       directions: "आप कहाँ जाना चाहते हैं?",
       food: "आप किस प्रकार का खाना आज़माना चाहते हैं?",
       emergency: "आपातकालीन संपर्क और महत्वपूर्ण नंबर",
-      thank_you: "WanderMind का उपयोग करने के लिए धन्यवाद!",
+      thank_you: "IRL.TRAVEL का उपयोग करने के लिए धन्यवाद!",
       help: "मदद चाहिए? अपनी यात्रा के बारे में मुझसे कुछ भी पूछें।"
     },
     bn: {
@@ -59,7 +59,7 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
       directions: "আপনি কোথায় যেতে চান?",
       food: "আপনি কী ধরনের খাবার চেষ্টা করতে চান?",
       emergency: "জরুরি যোগাযোগ এবং গুরুত্বপূর্ণ নম্বর",
-      thank_you: "WanderMind ব্যবহার করার জন্য ধন্যবাদ!",
+      thank_you: "IRL.TRAVEL ব্যবহার করার জন্য ধন্যবাদ!",
       help: "সাহায্য দরকার? আপনার ভ্রমণ সম্পর্কে আমাকে যেকোনো কিছু জিজ্ঞাসা করুন।"
     }
   };
@@ -171,15 +171,15 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
           </p>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-6">
             {supportedLanguages.map((language) => (
               <Button
                 key={language.code}
                 variant={selectedLanguage === language.code ? "default" : "outline"}
                 onClick={() => handleLanguageChange(language.code)}
-                className="flex flex-col items-center p-3 h-auto"
+                className="flex flex-col items-center h-auto p-3"
               >
-                <span className="text-2xl mb-1">{language.flag}</span>
+                <span className="mb-1 text-2xl">{language.flag}</span>
                 <span className="text-xs font-medium">{language.nativeName}</span>
                 <span className="text-xs text-gray-500 dark:text-gray-400">{language.name}</span>
               </Button>
@@ -227,17 +227,17 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
           </div>
 
           {voiceInput && (
-            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
               <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Voice Input Detected:</p>
               <p className="text-blue-700 dark:text-blue-300">{voiceInput}</p>
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {Object.entries(getCurrentPhrases()).map(([key, phrase]) => (
               <div
                 key={key}
-                className="p-3 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors dark:border-gray-700"
+                className="p-3 transition-colors border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 dark:border-gray-700"
                 onClick={() => speakText(phrase)}
               >
                 <div className="flex items-center justify-between">
@@ -271,14 +271,14 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
               }, {})
             ).map(([category, phrases]) => (
               <div key={category}>
-                <h4 className="font-medium text-sm text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                <h4 className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                   <Badge variant="secondary">{category}</Badge>
                 </h4>
                 <div className="grid gap-2">
                   {phrases.map((phrase, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-800 rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center justify-between p-2 transition-colors rounded cursor-pointer bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
                       onClick={() => speakText(phrase)}
                     >
                       <span className="text-sm">{phrase}</span>
@@ -302,9 +302,9 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <h4 className="font-medium text-yellow-800 mb-1">Language Tips for {getCurrentLanguageData().name}</h4>
-              <ul className="text-sm text-yellow-700 space-y-1">
+            <div className="p-3 border border-yellow-200 rounded-lg bg-yellow-50">
+              <h4 className="mb-1 font-medium text-yellow-800">Language Tips for {getCurrentLanguageData().name}</h4>
+              <ul className="space-y-1 text-sm text-yellow-700">
                 <li>• Most locals in tourist areas understand basic English</li>
                 <li>• Learning a few local phrases shows respect and often gets better service</li>
                 <li>• Use translation apps for complex conversations</li>
@@ -312,9 +312,9 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
               </ul>
             </div>
 
-            <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-              <h4 className="font-medium text-green-800 mb-1">Cultural Etiquette</h4>
-              <ul className="text-sm text-green-700 space-y-1">
+            <div className="p-3 border border-green-200 rounded-lg bg-green-50">
+              <h4 className="mb-1 font-medium text-green-800">Cultural Etiquette</h4>
+              <ul className="space-y-1 text-sm text-green-700">
                 <li>• Greet with "Namaste" (hands together) in most Indian regions</li>
                 <li>• Remove shoes when entering homes or religious places</li>
                 <li>• Use right hand for eating and greeting</li>
@@ -322,18 +322,18 @@ const MultilingualSupport = ({ currentLanguage = 'en', onLanguageChange }) => {
               </ul>
             </div>
 
-            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg">
-              <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-1">Emergency Phrases</h4>
-              <div className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
-                <div className="flex justify-between items-center">
+            <div className="p-3 border border-blue-200 rounded-lg bg-blue-50 dark:bg-blue-900/20 dark:border-blue-700">
+              <h4 className="mb-1 font-medium text-blue-800 dark:text-blue-200">Emergency Phrases</h4>
+              <div className="space-y-1 text-sm text-blue-700 dark:text-blue-300">
+                <div className="flex items-center justify-between">
                   <span>Help: मदद (Madad)</span>
                   <Volume2 className="w-3 h-3 cursor-pointer" onClick={() => speakText('मदद')} />
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <span>Police: पुलिस (Police)</span>
                   <Volume2 className="w-3 h-3 cursor-pointer" onClick={() => speakText('पुलिस')} />
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <span>Hospital: अस्पताल (Aspatal)</span>
                   <Volume2 className="w-3 h-3 cursor-pointer" onClick={() => speakText('अस्पताल')} />
                 </div>

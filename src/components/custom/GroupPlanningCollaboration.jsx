@@ -132,7 +132,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
     
     const topHotel = getTopVoted();
     message += `🏨 *Group's Top Choice:* ${topHotel.name} (${topHotel.price})\n\n`;
-    message += `✨ Planned with WanderMind AI\n`;
+    message += `✨ Planned with IRL.TRAVEL AI\n`;
     message += `🔗 ${shareLink}`;
     
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -235,7 +235,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
         const mailtoLink = emailService.generateMailtoLink({
           toEmail: newMemberEmail,
           subject: `Trip Invitation: ${destination}`,
-          body: `Hi ${newMemberName},\n\n${organizer} has invited you to collaborate on a trip to ${destination} (${duration})!\n\nClick here to view and collaborate: ${shareLink}\n\nBest regards,\nWanderMind Team`
+          body: `Hi ${newMemberName},\n\n${organizer} has invited you to collaborate on a trip to ${destination} (${duration})!\n\nClick here to view and collaborate: ${shareLink}\n\nBest regards,\IRL.TRAVEL Team`
         });
         window.open(mailtoLink, '_blank');
       } else {
@@ -261,7 +261,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           <CardTitle className="flex items-center gap-2">
             <Users className="w-5 h-5 text-blue-600" />
             Group Planning & Collaboration
-            <Badge variant="secondary" className="ml-auto bg-blue-100 text-blue-800">
+            <Badge variant="secondary" className="ml-auto text-blue-800 bg-blue-100">
               Social
             </Badge>
           </CardTitle>
@@ -274,7 +274,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       {/* Share Link */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Share2 className="w-5 h-5 text-green-600" />
             Share with Group
           </CardTitle>
@@ -305,7 +305,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
             </Button>
           </div>
           
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+          <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
             <p className="text-sm text-blue-800 dark:text-blue-200">
               💡 <strong>Share this link</strong> with your group. They can view the plan, change preferences, and vote on options!
             </p>
@@ -316,7 +316,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       {/* Group Members */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg flex items-center justify-between">
+          <CardTitle className="flex items-center justify-between text-lg">
             <div className="flex items-center gap-2">
               <Users className="w-5 h-5 text-purple-600" />
               Group Members ({groupMembers.length})
@@ -337,7 +337,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
             {groupMembers.map(member => (
               <div
                 key={member.id}
-                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{member.avatar}</span>
@@ -347,7 +347,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
                         {member.name}
                       </span>
                       {member.role === 'organizer' && (
-                        <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 text-xs">
+                        <Badge variant="secondary" className="text-xs text-yellow-800 bg-yellow-100">
                           <Crown className="w-3 h-3 mr-1" />
                           Organizer
                         </Badge>
@@ -373,7 +373,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       {/* Group Voting */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Vote className="w-5 h-5 text-orange-600" />
             Group Voting - Hotels
           </CardTitle>
@@ -402,7 +402,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
                         {item.name}
                       </h4>
                       {isTopVoted && (
-                        <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
+                        <Badge variant="secondary" className="text-xs text-green-800 bg-green-100">
                           🏆 Top Choice
                         </Badge>
                       )}
@@ -449,7 +449,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
             );
           })}
           
-          <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800">
+          <div className="p-3 border border-green-200 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-800">
             <p className="text-sm text-green-800 dark:text-green-200">
               ✅ <strong>Group Decision:</strong> {getTopVoted().name} is leading with {Object.values(getTopVoted().votes).reduce((sum, count) => sum + count, 0)} votes!
             </p>
@@ -460,7 +460,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       {/* Export Options */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Download className="w-5 h-5 text-indigo-600" />
             Export & Share
           </CardTitle>
@@ -472,7 +472,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           <Button
             onClick={exportToWhatsApp}
             variant="outline"
-            className="w-full justify-start h-auto py-3"
+            className="justify-start w-full h-auto py-3"
           >
             <div className="flex items-center gap-3">
               <MessageCircle className="w-5 h-5 text-green-600" />
@@ -488,7 +488,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           <Button
             onClick={exportToPDF}
             variant="outline"
-            className="w-full justify-start h-auto py-3"
+            className="justify-start w-full h-auto py-3"
           >
             <div className="flex items-center gap-3">
               <FileText className="w-5 h-5 text-red-600" />
@@ -504,7 +504,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           <Button
             onClick={exportToGoogleCalendar}
             variant="outline"
-            className="w-full justify-start h-auto py-3"
+            className="justify-start w-full h-auto py-3"
           >
             <div className="flex items-center gap-3">
               <Calendar className="w-5 h-5 text-blue-600" />
@@ -520,7 +520,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           <Button
             onClick={handleCopyLink}
             variant="outline"
-            className="w-full justify-start h-auto py-3"
+            className="justify-start w-full h-auto py-3"
           >
             <div className="flex items-center gap-3">
               <LinkIcon className="w-5 h-5 text-purple-600" />
@@ -541,7 +541,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           <div className="flex items-start gap-2">
             <Check className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
             <div className="text-sm text-green-800 dark:text-green-200">
-              <p className="font-semibold mb-1">Ready to Book?</p>
+              <p className="mb-1 font-semibold">Ready to Book?</p>
               <p>Once your group finalizes the plan, the organizer can proceed with EaseMyTrip booking. All group preferences and top-voted options will be included!</p>
             </div>
           </div>
@@ -562,9 +562,9 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           </DialogDescription>
         </DialogHeader>
         
-        <div className="space-y-4 mt-4">
+        <div className="mt-4 space-y-4">
           <div>
-            <label className="text-sm font-medium mb-2 block">Name</label>
+            <label className="block mb-2 text-sm font-medium">Name</label>
             <Input
               placeholder="Enter member's name"
               value={newMemberName}
@@ -574,7 +574,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
           </div>
           
           <div>
-            <label className="text-sm font-medium mb-2 block">Email Address</label>
+            <label className="block mb-2 text-sm font-medium">Email Address</label>
             <Input
               type="email"
               placeholder="member@example.com"
@@ -584,13 +584,13 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
             />
           </div>
 
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+          <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
             <p className="text-xs text-blue-800 dark:text-blue-200">
               💡 They'll receive an email with a link to view the trip, vote on options, and collaborate with the group.
             </p>
           </div>
 
-          <div className="flex gap-2 justify-end">
+          <div className="flex justify-end gap-2">
             <Button
               variant="outline"
               onClick={() => {
@@ -609,7 +609,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
             >
               {sendingInvite ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></div>
                   Sending...
                 </>
               ) : (

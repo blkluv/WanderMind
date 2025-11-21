@@ -33,7 +33,7 @@ class EmailService {
         trip_duration: duration,
         trip_link: tripLink,
         message: message || `You've been invited to collaborate on a trip to ${destination}!`,
-        reply_to: 'noreply@wandermind.com'
+        reply_to: 'noreply@irl.travel'
       };
 
       const response = await emailjs.send(

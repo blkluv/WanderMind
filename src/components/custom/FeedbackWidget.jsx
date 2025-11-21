@@ -74,7 +74,7 @@ const FeedbackWidget = ({ isOpen, onClose, onFeedbackSubmit }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <Card className="w-full max-w-md animate-in zoom-in-95">
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -87,13 +87,13 @@ const FeedbackWidget = ({ isOpen, onClose, onFeedbackSubmit }) => {
             </Button>
           </div>
           <p className="text-sm text-gray-600">
-            Help us improve WanderMind with your valuable feedback
+            Help us improve IRL.TRAVEL with your valuable feedback
           </p>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Rating */}
           <div>
-            <label className="text-sm font-medium mb-2 block">
+            <label className="block mb-2 text-sm font-medium">
               How would you rate your experience?
             </label>
             <div className="flex gap-1">
@@ -101,7 +101,7 @@ const FeedbackWidget = ({ isOpen, onClose, onFeedbackSubmit }) => {
                 <button
                   key={star}
                   onClick={() => setRating(star)}
-                  className="p-1 hover:scale-110 transition-transform"
+                  className="p-1 transition-transform hover:scale-110"
                 >
                   <Star
                     className={`w-6 h-6 ${
@@ -117,7 +117,7 @@ const FeedbackWidget = ({ isOpen, onClose, onFeedbackSubmit }) => {
 
           {/* Category */}
           <div>
-            <label className="text-sm font-medium mb-2 block">
+            <label className="block mb-2 text-sm font-medium">
               Feedback Category
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -138,17 +138,17 @@ const FeedbackWidget = ({ isOpen, onClose, onFeedbackSubmit }) => {
 
           {/* Comment */}
           <div>
-            <label className="text-sm font-medium mb-2 block">
+            <label className="block mb-2 text-sm font-medium">
               Comments (Optional)
             </label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Tell us what you think..."
-              className="w-full p-3 border rounded-lg resize-none h-20 text-sm"
+              className="w-full h-20 p-3 text-sm border rounded-lg resize-none"
               maxLength={500}
             />
-            <div className="text-xs text-gray-500 mt-1">
+            <div className="mt-1 text-xs text-gray-500">
               {comment.length}/500 characters
             </div>
           </div>
