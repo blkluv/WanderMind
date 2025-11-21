@@ -53,7 +53,7 @@ const apiKey = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
 
 // Demo data fallback for when JSON parsing fails
 const generateDemoTripData = (formData) => {
-  const destination = formData?.location?.label || "Delhi";
+  const destination = formData?.location?.label || "New York";
   const days = parseInt(formData?.noofDays) || 3;
   
   return {
@@ -62,13 +62,13 @@ const generateDemoTripData = (formData) => {
       duration: `${days} days`,
       travelers: formData?.traveler || "1 Person",
       budget: formData?.budget || "moderate",
-      totalBudget: formData?.budgetAmount || 25000
+      totalBudget: formData?.budgetAmount || 750
     },
     hotels: [
       {
         name: `Premium Hotel in ${destination}`,
         address: `Central ${destination}`,
-        price: "₹3,500/night",
+        price: "$120/night",
         rating: 4.2,
         description: "Comfortable accommodation with modern amenities"
       }
@@ -80,14 +80,14 @@ const generateDemoTripData = (formData) => {
           time: "9:00 AM",
           activity: `Explore ${destination} landmarks`,
           details: "Visit popular attractions and local sites",
-          ticketPricing: "₹500-1000",
+          ticketPricing: "$20-40",
           timeToTravel: "30 mins"
         },
         {
           time: "2:00 PM",
           activity: "Local cuisine experience",
           details: "Try authentic local food",
-          ticketPricing: "₹800-1200",
+          ticketPricing: "$25-50",
           timeToTravel: "15 mins"
         }
       ]
@@ -267,7 +267,7 @@ function CreateTrip() {
       custom: 'Custom Budget'
     };
     
-    toast.success(`✅ ${budgetNames[type] || type} selected: ₹${amount.toLocaleString()}`);
+    toast.success(`✅ ${budgetNames[type] || type} selected: $${amount.toLocaleString()}`);
     
     // Auto-navigate to next step if all required fields are filled
     if (formData?.location && formData?.noofDays && formData?.traveler) {
@@ -490,16 +490,16 @@ function CreateTrip() {
   const [rateLimitHit, setRateLimitHit] = useState(false);
 
   return (
-    <div className="container mx-auto max-w-7xl px-5 sm:px-10 md:px-12 lg:px-16 xl:px-20 mt-10 pb-16">
-      <div className="text-center mb-8">
-        <h2 className="font-bold text-4xl text-gray-900 dark:text-white">
+    <div className="container px-5 pb-16 mx-auto mt-10 max-w-7xl sm:px-10 md:px-12 lg:px-16 xl:px-20">
+      <div className="mb-8 text-center">
+        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
           Create Your Perfect Trip ✨
         </h2>
-        <p className="mt-3 text-gray-700 dark:text-gray-300 text-lg">
+        <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">
           AI-powered travel planning with personalized recommendations
         </p>
         {(isDemoMode || rateLimitHit) && (
-          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <div className="p-3 mt-4 border border-blue-200 rounded-lg bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800">
             <p className="text-sm text-blue-800 dark:text-blue-200">
               {rateLimitHit ? (
                 <>⚡ <strong>Rate Limit Mode:</strong> API quota exceeded. Using demo mode with realistic sample data!</>
@@ -519,9 +519,9 @@ function CreateTrip() {
       </div>
 
       {/* Progress Indicator */}
-      <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border">
+      <div className="p-4 mb-6 border rounded-lg bg-gray-50 dark:bg-gray-800">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-semibold text-sm">Trip Planning Progress</h3>
+          <h3 className="text-sm font-semibold">Trip Planning Progress</h3>
           <span className="text-xs text-gray-500">
             {[formData?.location, formData?.noofDays, formData?.traveler, formData?.budget].filter(Boolean).length}/4 completed
           </span>
@@ -541,7 +541,7 @@ function CreateTrip() {
           </div>
           <div className={`flex items-center gap-1 ${formData?.budget ? 'text-green-600' : 'text-red-500 font-medium'}`}>
             <div className={`w-2 h-2 rounded-full ${formData?.budget ? 'bg-green-500' : 'bg-red-500'}`}></div>
-            Budget {formData?.budgetAmount ? `(₹${parseInt(formData.budgetAmount).toLocaleString()})` : formData?.budget ? `(${formatBudget(formData.budget)})` : '(Required)'}
+            Budget {formData?.budgetAmount ? `($${parseInt(formData.budgetAmount).toLocaleString()})` : formData?.budget ? `(${formatBudget(formData.budget)})` : '(Required)'}
           </div>
         </div>
       </div>
@@ -568,14 +568,14 @@ function CreateTrip() {
             <MapPin className="w-4 h-4 mr-2" />
             Details
             {(!formData?.location || !formData?.noofDays || !formData?.traveler) && (
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              <span className="absolute w-2 h-2 bg-red-500 rounded-full -top-1 -right-1"></span>
             )}
           </TabsTrigger>
           <TabsTrigger value="budget" className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium !text-gray-900 dark:!text-gray-100 !bg-transparent hover:!bg-gray-100 dark:hover:!bg-gray-700 data-[state=active]:!bg-green-600 data-[state=active]:!text-white transition-all relative">
             <Calculator className="w-4 h-4 mr-2" />
             Budget
             {!formData?.budget && (
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              <span className="absolute w-2 h-2 bg-red-500 rounded-full -top-1 -right-1"></span>
             )}
           </TabsTrigger>
           <TabsTrigger value="safety" className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium !text-gray-900 dark:!text-gray-100 !bg-transparent hover:!bg-gray-100 dark:hover:!bg-gray-700 data-[state=active]:!bg-pink-600 data-[state=active]:!text-white transition-all">
@@ -586,13 +586,13 @@ function CreateTrip() {
 
         <TabsContent value="voice" className="mt-6">
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+            <div className="mb-6 text-center">
+              <h2 className="flex items-center justify-center gap-2 mb-2 text-2xl font-bold">
                 <Sparkles className="w-6 h-6 text-orange-500" />
-                Bolkar Plan Banao 🇮🇳
+                Voice-First Planning
               </h2>
               <p className="text-gray-600 dark:text-gray-400">
-                Apni bhasha mein boliye, AI samajh jayega! Voice-first planning for India.
+                Speak your travel plans and let AI handle the rest!
               </p>
             </div>
             <VoiceFirstPlanner 
@@ -610,11 +610,11 @@ function CreateTrip() {
                   handleInputChange('budget', parsed.budget);
                   // Also set budget amount for validation
                   const budgetAmounts = {
-                    'budget': 15000,
-                    'moderate': 35000,
-                    'luxury': 75000
+                    'budget': 300,
+                    'moderate': 750,
+                    'luxury': 1500
                   };
-                  handleInputChange('budgetAmount', budgetAmounts[parsed.budget] || 25000);
+                  handleInputChange('budgetAmount', budgetAmounts[parsed.budget] || 500);
                 }
                 if (parsed.traveler) {
                   handleInputChange('traveler', parsed.traveler);
@@ -630,8 +630,8 @@ function CreateTrip() {
 
         <TabsContent value="quickplan" className="mt-6">
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+            <div className="mb-6 text-center">
+              <h2 className="flex items-center justify-center gap-2 mb-2 text-2xl font-bold">
                 <Zap className="w-6 h-6 text-yellow-500" />
                 Last-Minute Quick Plan
               </h2>
@@ -663,7 +663,7 @@ function CreateTrip() {
         <TabsContent value="basic" className="mt-6 space-y-6">
           <div className="grid gap-6">
             <div>
-              <h2 className="text-xl my-3 font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <h2 className="flex items-center gap-2 my-3 text-xl font-medium text-gray-900 dark:text-gray-100">
                 <MapPin className="w-5 h-5 text-red-500" />
                 What is your destination of choice?
               </h2>
@@ -681,7 +681,7 @@ function CreateTrip() {
             </div>
 
             <div>
-              <h2 className="text-xl my-3 font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <h2 className="flex items-center gap-2 my-3 text-xl font-medium text-gray-900 dark:text-gray-100">
                 <Calendar className="w-5 h-5 text-blue-500" />
                 How many days are you planning your trip?
               </h2>
@@ -695,11 +695,11 @@ function CreateTrip() {
             </div>
 
             <div>
-              <h2 className="text-xl my-3 font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100">
+              <h2 className="flex items-center gap-2 my-3 text-xl font-medium text-gray-900 dark:text-gray-100">
                 <Users className="w-5 h-5 text-green-500" />
                 Who do you plan on travelling with?
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+              <div className="grid grid-cols-2 gap-4 mt-5 md:grid-cols-4">
                 {SelectTravelsList.map((item, index) => (
                   <div
                     key={index}
@@ -711,8 +711,8 @@ function CreateTrip() {
                       }`}
                   >
                     <h2 className="text-3xl text-center">{item.icon}</h2>
-                    <h2 className="font-bold text-lg text-center text-gray-900 dark:text-gray-100">{item.title}</h2>
-                    <h2 className="text-sm text-gray-600 dark:text-gray-400 text-center">{item.desc}</h2>
+                    <h2 className="text-lg font-bold text-center text-gray-900 dark:text-gray-100">{item.title}</h2>
+                    <h2 className="text-sm text-center text-gray-600 dark:text-gray-400">{item.desc}</h2>
                   </div>
                 ))}
               </div>
@@ -747,7 +747,7 @@ function CreateTrip() {
                       toast.success(`Trip duration adjusted to ${suggestion.value} days`);
                     } else if (suggestion.type === 'budget') {
                       handleBudgetSelect('custom', suggestion.value);
-                      toast.success(`Budget increased to ₹${suggestion.value.toLocaleString()}`);
+                      toast.success(`Budget increased to $${suggestion.value.toLocaleString()}`);
                     } else {
                       toast.success(`Great choice! ${suggestion.type} suggestion accepted`);
                     }
@@ -756,9 +756,9 @@ function CreateTrip() {
               )}
             </div>
           ) : (
-            <div className="text-center py-8">
-              <Calculator className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">
+            <div className="py-8 text-center">
+              <Calculator className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+              <h3 className="mb-2 text-lg font-medium text-gray-800 dark:text-gray-200">
                 Complete Trip Details First
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
@@ -770,13 +770,13 @@ function CreateTrip() {
 
         <TabsContent value="safety" className="mt-6">
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+            <div className="mb-6 text-center">
+              <h2 className="flex items-center justify-center gap-2 mb-2 text-2xl font-bold">
                 <Shield className="w-6 h-6 text-pink-500" />
                 Safety & Accessibility
               </h2>
               <p className="text-gray-600 dark:text-gray-400">
-                India-first filters for safe, accessible, and comfortable travel 🇮🇳
+                Filters for safe, accessible, and comfortable travel
               </p>
             </div>
             <SafetyAccessibilityFilters 
@@ -793,8 +793,8 @@ function CreateTrip() {
 
         <TabsContent value="constraints" className="mt-6">
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">Travel Constraints</h2>
+            <div className="mb-6 text-center">
+              <h2 className="mb-2 text-2xl font-bold">Travel Constraints</h2>
               <p className="text-gray-600 dark:text-gray-400">
                 Set rules that AI must follow when planning your trip
               </p>
@@ -806,11 +806,11 @@ function CreateTrip() {
         <TabsContent value="realtime" className="mt-6">
           <div className="space-y-6">
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-4 flex items-center justify-center gap-2">
+              <h2 className="flex items-center justify-center gap-2 mb-4 text-2xl font-bold">
                 <Zap className="w-6 h-6 text-yellow-500" />
                 Real-Time Adaptation Demo
               </h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
                 Experience how our AI adapts your itinerary based on live conditions like weather, traffic, and events.
               </p>
             </div>
@@ -828,12 +828,12 @@ function CreateTrip() {
         <TabsContent value="multilingual" className="mt-6">
           <div className="space-y-6">
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-4 flex items-center justify-center gap-2">
+              <h2 className="flex items-center justify-center gap-2 mb-4 text-2xl font-bold">
                 <Globe className="w-6 h-6 text-blue-500" />
                 Multilingual Support Demo
               </h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
-                Experience voice assistance and travel planning in 12+ Indian languages with cultural insights.
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
+                Experience voice assistance and travel planning in multiple languages with cultural insights.
               </p>
             </div>
             <MultilingualSupport
@@ -849,14 +849,14 @@ function CreateTrip() {
         <TabsContent value="advanced" className="mt-6">
           <div className="space-y-8">
             <div className="text-center">
-              <h2 className="text-2xl font-bold mb-4">Advanced Features</h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-8">
+              <h2 className="mb-4 text-2xl font-bold">Advanced Features</h2>
+              <p className="mb-8 text-gray-700 dark:text-gray-300">
                 Explore additional features that make your travel planning experience exceptional.
               </p>
             </div>
 
             {/* Feature Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 md:grid-cols-2">
               {/* Weather Adaptation */}
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 bg-white dark:bg-gray-900 hover:border-[#2196f3] transition-colors">
                 <div className="flex items-center gap-3 mb-4">
@@ -867,7 +867,7 @@ function CreateTrip() {
                   </div>
                 </div>
                 <WeatherAdaptive
-                  destination={formData?.location?.label || "Delhi"}
+                  destination={formData?.location?.label || "New York"}
                   itinerary={formData}
                   onItineraryUpdate={(update) => {
                     console.log('Weather update:', update);
@@ -882,7 +882,7 @@ function CreateTrip() {
                   <CreditCard className="w-8 h-8 text-green-500" />
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">One-Click Booking</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Seamless EaseMyTrip integration</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Seamless booking integration</p>
                   </div>
                 </div>
                 <BookingSystem
@@ -938,7 +938,7 @@ function CreateTrip() {
       </Tabs>
 
       {/* Generate Trip Button */}
-      <div className="my-10 flex justify-center">
+      <div className="flex justify-center my-10">
         <Button
           disabled={loading || !formData?.location || !formData?.noofDays || !formData?.traveler || !formData?.budget}
           onClick={OnGenerateTrip}
@@ -947,7 +947,7 @@ function CreateTrip() {
         >
           {loading ? (
             <>
-              <AiOutlineLoading3Quarters className="animate-spin text-xl mr-2" />
+              <AiOutlineLoading3Quarters className="mr-2 text-xl animate-spin" />
               {isDemoMode ? 'Generating Demo Trip...' : 'Generating Your Perfect Trip...'}
             </>
           ) : (
@@ -961,9 +961,9 @@ function CreateTrip() {
 
       {/* Trip Summary */}
       {(formData?.location || selectedPersona || predictedBudget) && (
-        <div className="mb-8 p-6 rounded-lg bg-card text-card-foreground border border-border shadow-sm transition-colors">
-          <h3 className="font-semibold text-lg mb-4">Trip Summary</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-sm">
+        <div className="p-6 mb-8 transition-colors border rounded-lg shadow-sm bg-card text-card-foreground border-border">
+          <h3 className="mb-4 text-lg font-semibold">Trip Summary</h3>
+          <div className="grid gap-4 text-sm md:grid-cols-2">
             {formData?.location && (
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-red-500" />
@@ -991,7 +991,7 @@ function CreateTrip() {
             {predictedBudget && (
               <div className="flex items-center gap-2">
                 <Calculator className="w-4 h-4 text-orange-500" />
-                <span>Budget: ₹{predictedBudget.amount?.toLocaleString()}</span>
+                <span>Budget: ${predictedBudget.amount?.toLocaleString()}</span>
               </div>
             )}
           </div>
@@ -1020,11 +1020,11 @@ function CreateTrip() {
                   Wander<span className="text-[#000000]">Mind</span>
                 </h2>
               </div>
-              <h2 className="font-bold text-lg mt-5">Sign In With Google</h2>
-              <p>Sign in to the App with the Google authentication sexure.</p>
+              <h2 className="mt-5 text-lg font-bold">Sign In With Google</h2>
+              <p>Sign in to the App with the Google authentication secure.</p>
               <Button
                 onClick={login}
-                className="mt-5 w-full flex gap-4 items-center"
+                className="flex items-center w-full gap-4 mt-5"
               >
                 <FcGoogle style={{ height: "35px", width: "25px" }} />
                 Sign In With Google

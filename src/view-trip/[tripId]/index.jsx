@@ -595,7 +595,7 @@ function Viewtrip() {
                   <div className="text-right">
                     <div className="mb-1 text-3xl">✈️</div>
                     <div className="text-xs font-bold tracking-wider">
-                      WANDER<span className="text-yellow-300">MIND</span>
+                      IRL.<span className="text-yellow-300">TRAVEL</span>
                     </div>
                   </div>
                 </div>
@@ -1012,7 +1012,7 @@ function Viewtrip() {
           {/* Footer */}
           <div style={{ marginTop: '40px', paddingTop: '20px', borderTop: '3px solid #e5e7eb', textAlign: 'center' }}>
             <div style={{ fontSize: '16px', fontWeight: '600', color: '#3b82f6', marginBottom: '8px' }}>
-              ✈️ Happy Traveling with WanderMind!
+              ✈️ Happy Traveling with IRL.TRAVEL!
             </div>
             <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '6px' }}>
               Your AI-Powered Travel Companion
