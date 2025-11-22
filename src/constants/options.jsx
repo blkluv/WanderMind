@@ -103,7 +103,7 @@ export const SelectBudgetOptions = [
   {
     id: 3,
     title: 'Luxury',
-    desc: 'Don’t worry about cost',
+    desc: 'Don\'t worry about cost',
     icon: '💸',
   },
 ];
@@ -129,7 +129,7 @@ export const AI_PROMPT = `
       "tripId": "string",
       "destination": "string",
       "duration": "{totalDays} days",
-      "totalBudget": "₹{amount}",
+      "totalBudget": "${amount}",
       "budgetCategory": "{budget}",
       "travelPersona": "{persona}",
       "themes": ["{themes}"],
@@ -138,12 +138,12 @@ export const AI_PROMPT = `
       "bookingReadiness": boolean
     },
     "smartBudgetBreakdown": {
-      "accommodation": {"amount": "₹string", "percentage": number, "bookingOptions": ["string"]},
-      "transport": {"amount": "₹string", "percentage": number, "modes": ["string"]},
-      "food": {"amount": "₹string", "percentage": number, "categories": ["string"]},
-      "activities": {"amount": "₹string", "percentage": number, "experiences": ["string"]},
-      "shopping": {"amount": "₹string", "percentage": number},
-      "emergency": {"amount": "₹string", "percentage": number},
+      "accommodation": {"amount": "$string", "percentage": number, "bookingOptions": ["string"]},
+      "transport": {"amount": "$string", "percentage": number, "modes": ["string"]},
+      "food": {"amount": "$string", "percentage": number, "categories": ["string"]},
+      "activities": {"amount": "$string", "percentage": number, "experiences": ["string"]},
+      "shopping": {"amount": "$string", "percentage": number},
+      "emergency": {"amount": "$string", "percentage": number},
       "optimizationTips": ["string"]
     },
     "accommodationOptions": [
@@ -152,8 +152,8 @@ export const AI_PROMPT = `
         "name": "string",
         "category": "budget|moderate|luxury",
         "address": "string",
-        "pricePerNight": "₹string",
-        "totalCost": "₹string",
+        "pricePerNight": "$string",
+        "totalCost": "$string",
         "rating": number,
         "amenities": ["string"],
         "geoCoordinates": {"lat": number, "lng": number},
@@ -177,7 +177,7 @@ export const AI_PROMPT = `
             "location": "string",
             "description": "string",
             "duration": "string",
-            "cost": "₹string",
+            "cost": "$string",
             "category": "heritage|adventure|culture|food|shopping|nature",
             "geoCoordinates": {"lat": number, "lng": number},
             "imageUrl": "string",
@@ -193,7 +193,7 @@ export const AI_PROMPT = `
         ],
         "transportPlan": {
           "mode": "string",
-          "cost": "₹string",
+          "cost": "$string",
           "duration": "string",
           "bookingDetails": "string"
         },
@@ -202,12 +202,12 @@ export const AI_PROMPT = `
             "meal": "breakfast|lunch|dinner|snacks",
             "restaurant": "string",
             "cuisine": "string",
-            "cost": "₹string",
+            "cost": "$string",
             "location": "string",
             "speciality": "string"
           }
         ],
-        "dayBudget": "₹string",
+        "dayBudget": "$string",
         "emergencyContacts": ["string"]
       }
     ],
@@ -218,7 +218,7 @@ export const AI_PROMPT = `
         "description": "string",
         "location": "string",
         "bestTime": "string",
-        "cost": "₹string",
+        "cost": "$string",
         "localSecret": "string",
         "geoCoordinates": {"lat": number, "lng": number}
       }
@@ -246,20 +246,20 @@ export const AI_PROMPT = `
       "emergencyPlans": ["string"]
     },
     "bookingSummary": {
-      "totalCost": "₹string",
+      "totalCost": "$string",
       "bookableItems": [
         {
           "type": "accommodation|transport|activity",
           "name": "string",
-          "cost": "₹string",
+          "cost": "$string",
           "bookingUrl": "string",
           "priority": "high|medium|low"
         }
       ],
       "paymentBreakdown": {
-        "immediate": "₹string",
-        "onArrival": "₹string",
-        "flexible": "₹string"
+        "immediate": "$string",
+        "onArrival": "$string",
+        "flexible": "$string"
       }
     },
     "shareableContent": {
@@ -287,7 +287,7 @@ export const CHAT_REFINEMENT_PROMPT = `
   
   Common requests:
   - "Add a day in [location]"
-  - "Reduce budget to ₹[amount]"
+  - "Reduce budget to $[amount]"
   - "Remove [activity/place]"
   - "Make it more [adventurous/relaxing/cultural]"
   - "Find cheaper alternatives"
@@ -307,5 +307,5 @@ export const BUDGET_PREDICTOR_PROMPT = `
   - Shopping and miscellaneous
   - Seasonal price variations
   
-  Provide budget ranges in INR for different comfort levels.
+  Provide budget ranges in USD for different comfort levels.
 `;

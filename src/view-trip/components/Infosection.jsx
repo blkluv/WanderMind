@@ -20,12 +20,12 @@ function Infosection({ trip }) {
     
     // Return default if no trip data
     if (!trip?.userSelection) {
-      return '₹25,000';
+      return '$300';
     }
     
     // Try to show actual budget amount first
     if (budgetAmount && budgetAmount > 0) {
-      return `₹${parseInt(budgetAmount).toLocaleString()}`;
+      return `$${parseInt(budgetAmount).toLocaleString()}`;
     }
     
     // Try to extract amount from trip data or generate realistic amount based on budget type
@@ -43,19 +43,19 @@ function Infosection({ trip }) {
     let estimatedAmount = 0;
     switch(budget) {
       case 'budget':
-        estimatedAmount = days * peopleCount * 2500; // ₹2,500 per person per day
+        estimatedAmount = days * peopleCount * 30; // $30 per person per day
         break;
       case 'moderate':
-        estimatedAmount = days * peopleCount * 4500; // ₹4,500 per person per day
+        estimatedAmount = days * peopleCount * 55; // $55 per person per day
         break;
       case 'luxury':
-        estimatedAmount = days * peopleCount * 8000; // ₹8,000 per person per day
+        estimatedAmount = days * peopleCount * 100; // $100 per person per day
         break;
       default:
-        estimatedAmount = days * peopleCount * 4000; // Default moderate
+        estimatedAmount = days * peopleCount * 50; // Default moderate
     }
     
-    return `₹${estimatedAmount.toLocaleString()}`;
+    return `$${estimatedAmount.toLocaleString()}`;
   };
 
   const GetPlacePhoto = async () => {
@@ -114,14 +114,14 @@ function Infosection({ trip }) {
           </div>
         )}
       </div>
-      <div className="my-5 flex flex-col gap-2">
-        <h2 className="font-bold text-2xl">
+      <div className="flex flex-col gap-2 my-5">
+        <h2 className="text-2xl font-bold">
           📍 {trip?.userSelection?.location?.label || 'Your Destination'}
         </h2>
         <div className="flex gap-5">
-          <h2 className="p-1 px-3 rounded-full bg-secondary text-secondary-foreground border border-border">📆 {trip?.userSelection?.noofDays || '3'} Days</h2>
-          <h2 className="p-1 px-3 rounded-full bg-secondary text-secondary-foreground border border-border">💸 {formatBudgetDisplay(trip)}</h2>
-          <h2 className="p-1 px-3 rounded-full bg-secondary text-secondary-foreground border border-border">🏕️ No. of Traveler : {trip?.userSelection?.traveler || '2 People'} </h2>
+          <h2 className="p-1 px-3 border rounded-full bg-secondary text-secondary-foreground border-border">📆 {trip?.userSelection?.noofDays || '3'} Days</h2>
+          <h2 className="p-1 px-3 border rounded-full bg-secondary text-secondary-foreground border-border">💸 {formatBudgetDisplay(trip)}</h2>
+          <h2 className="p-1 px-3 border rounded-full bg-secondary text-secondary-foreground border-border">🏕️ No. of Traveler : {trip?.userSelection?.traveler || '2 People'} </h2>
         </div>
       </div>
     </div>

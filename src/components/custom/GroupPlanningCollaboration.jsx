@@ -41,7 +41,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       id: 1,
       type: 'hotel',
       name: 'Hotel Taj Palace',
-      price: '₹4,500/night',
+      price: '$54/night',
       votes: { thumbsup: 2, heart: 1, smile: 0 },
       userVote: null
     },
@@ -49,7 +49,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       id: 2,
       type: 'hotel',
       name: 'Radisson Blu',
-      price: '₹3,800/night',
+      price: '$46/night',
       votes: { thumbsup: 1, heart: 2, smile: 1 },
       userVote: null
     },
@@ -57,7 +57,7 @@ const GroupPlanningCollaboration = ({ tripData, tripId }) => {
       id: 3,
       type: 'hotel',
       name: 'Lemon Tree Hotel',
-      price: '₹2,500/night',
+      price: '$30/night',
       votes: { thumbsup: 3, heart: 0, smile: 2 },
       userVote: null
     }

@@ -16,7 +16,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
     },
     budgetConstraints: {
       maxPaidActivitiesPerDay: 2,
-      maxMealBudgetPerDay: 1500
+      maxMealBudgetPerDay: 18
     },
     crowdConstraints: {
       avoidVeryCrowded: true,
@@ -72,7 +72,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
     if (constraints.timeConstraints.startDayAfter !== '08:00') count++;
     if (constraints.timeConstraints.maxHoursPerDay !== 10) count++;
     if (constraints.budgetConstraints.maxPaidActivitiesPerDay !== 2) count++;
-    if (constraints.budgetConstraints.maxMealBudgetPerDay !== 1500) count++;
+    if (constraints.budgetConstraints.maxMealBudgetPerDay !== 18) count++;
     if (constraints.crowdConstraints.avoidVeryCrowded) count++;
     if (constraints.crowdConstraints.preferOffPeakHours) count++;
     if (constraints.accessibilityConstraints.wheelchairAccessible) count++;
@@ -94,7 +94,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
         <CardContent className="space-y-6">
           {/* Time Constraints */}
           <div className="space-y-3">
-            <h4 className="font-semibold flex items-center gap-2 text-sm">
+            <h4 className="flex items-center gap-2 text-sm font-semibold">
               <Clock className="w-4 h-4" />
               Time Constraints
             </h4>
@@ -139,7 +139,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
 
           {/* Budget Constraints */}
           <div className="space-y-3">
-            <h4 className="font-semibold flex items-center gap-2 text-sm">
+            <h4 className="flex items-center gap-2 text-sm font-semibold">
               <DollarSign className="w-4 h-4" />
               Budget Constraints
             </h4>
@@ -159,11 +159,11 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
               </div>
               <div>
                 <label className="text-xs text-gray-600 dark:text-gray-400">
-                  Max meal budget/day (₹)
+                  Max meal budget/day ($)
                 </label>
                 <Input
                   type="number"
-                  step="100"
+                  step="1"
                   value={constraints.budgetConstraints.maxMealBudgetPerDay}
                   onChange={(e) => updateConstraint('budgetConstraints', 'maxMealBudgetPerDay', parseInt(e.target.value))}
                   className="text-sm"
@@ -174,7 +174,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
 
           {/* Crowd Constraints */}
           <div className="space-y-3">
-            <h4 className="font-semibold flex items-center gap-2 text-sm">
+            <h4 className="flex items-center gap-2 text-sm font-semibold">
               <Users className="w-4 h-4" />
               Crowd Preferences
             </h4>
@@ -202,7 +202,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
 
           {/* Accessibility Constraints */}
           <div className="space-y-3">
-            <h4 className="font-semibold flex items-center gap-2 text-sm">
+            <h4 className="flex items-center gap-2 text-sm font-semibold">
               <Shield className="w-4 h-4" />
               Accessibility Needs
             </h4>
@@ -234,7 +234,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
 
           {/* Custom Constraints */}
           <div className="space-y-3">
-            <h4 className="font-semibold flex items-center gap-2 text-sm">
+            <h4 className="flex items-center gap-2 text-sm font-semibold">
               <Plus className="w-4 h-4" />
               Custom Constraints
             </h4>
@@ -255,7 +255,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
                 {constraints.customConstraints.map((constraint, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 p-2 rounded text-sm"
+                    className="flex items-center justify-between p-2 text-sm rounded bg-gray-50 dark:bg-gray-800"
                   >
                     <span className="text-gray-700 dark:text-gray-300">{constraint}</span>
                     <Button
@@ -279,7 +279,7 @@ const TravelConstraints = ({ onConstraintsUpdate }) => {
           <div className="flex items-start gap-2">
             <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
             <div className="flex-1">
-              <h4 className="font-semibold text-sm text-blue-800 dark:text-blue-200 mb-1">
+              <h4 className="mb-1 text-sm font-semibold text-blue-800 dark:text-blue-200">
                 Active Constraints: {countActiveConstraints()}
               </h4>
               <p className="text-xs text-blue-600 dark:text-blue-400">

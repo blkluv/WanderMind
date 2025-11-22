@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Zap, MapPin, IndianRupee, Clock, Navigation, Sparkles } from 'lucide-react';
+import { Zap, MapPin, DollarSign, Clock, Navigation, Sparkles } from 'lucide-react';
 import { aiCopilot } from '@/service/AICopilotService';
 import { toast } from 'sonner';
 
@@ -19,8 +19,8 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
       return;
     }
 
-    if (parseInt(budget) < 500) {
-      toast.error('Minimum budget is ₹500');
+    if (parseInt(budget) < 6) {
+      toast.error('Minimum budget is $6');
       return;
     }
 
@@ -57,7 +57,7 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
           <CardTitle className="flex items-center gap-2">
             <Zap className="w-5 h-5 text-yellow-500" />
             Last-Minute Quick Plan
-            <Badge variant="secondary" className="ml-auto bg-yellow-100 text-yellow-800">
+            <Badge variant="secondary" className="ml-auto text-yellow-800 bg-yellow-100">
               INSTANT
             </Badge>
           </CardTitle>
@@ -68,7 +68,7 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
         <CardContent className="space-y-4">
           <div className="space-y-3">
             <div>
-              <label className="text-sm font-medium flex items-center gap-2 mb-2">
+              <label className="flex items-center gap-2 mb-2 text-sm font-medium">
                 <MapPin className="w-4 h-4" />
                 Where are you right now?
               </label>
@@ -81,20 +81,20 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
             </div>
 
             <div>
-              <label className="text-sm font-medium flex items-center gap-2 mb-2">
-                <IndianRupee className="w-4 h-4" />
-                Quick budget (₹)
+              <label className="flex items-center gap-2 mb-2 text-sm font-medium">
+                <DollarSign className="w-4 h-4" />
+                Quick budget ($)
               </label>
               <Input
                 type="number"
-                placeholder="e.g., 2000"
+                placeholder="e.g., 24"
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
                 className="text-base"
-                min="500"
+                min="6"
               />
               <div className="flex gap-2 mt-2">
-                {[1000, 2000, 3000, 5000].map(amount => (
+                {[12, 24, 36, 60].map(amount => (
                   <Button
                     key={amount}
                     variant="outline"
@@ -102,7 +102,7 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
                     onClick={() => handleQuickBudget(amount)}
                     className="text-xs"
                   >
-                    ₹{amount}
+                    ${amount}
                   </Button>
                 ))}
               </div>
@@ -148,11 +148,11 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="bg-white dark:bg-gray-800 p-3 rounded-lg">
+              <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
                 <div className="text-xs text-gray-600 dark:text-gray-400">Total Cost</div>
                 <div className="text-xl font-bold text-green-600">{quickPlan.totalCost}</div>
               </div>
-              <div className="bg-white dark:bg-gray-800 p-3 rounded-lg">
+              <div className="p-3 bg-white rounded-lg dark:bg-gray-800">
                 <div className="text-xs text-gray-600 dark:text-gray-400">Duration</div>
                 <div className="text-xl font-bold text-blue-600">{quickPlan.totalTime}</div>
               </div>
@@ -162,7 +162,7 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
               {quickPlan.quickPlan.map((spot, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 p-4 rounded-lg border-l-4 border-purple-500"
+                  className="p-4 bg-white border-l-4 border-purple-500 rounded-lg dark:bg-gray-800"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -173,12 +173,12 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
                         🚗 {spot.travel}
                       </span>
                     </div>
-                    <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30">
+                    <Badge className="text-green-800 bg-green-100 dark:bg-green-900/30">
                       {spot.cost}
                     </Badge>
                   </div>
                   
-                  <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                  <h4 className="mb-1 font-semibold text-gray-900 dark:text-gray-100">
                     {index + 1}. {spot.spot}
                   </h4>
                   
@@ -189,17 +189,17 @@ const LastMinuteQuickPlan = ({ onPlanGenerated }) => {
               ))}
             </div>
 
-            <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 p-4 rounded-lg">
+            <div className="p-4 rounded-lg bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30">
               <div className="flex items-start gap-2">
                 <Sparkles className="w-5 h-5 text-purple-600 mt-0.5" />
                 <div className="flex-1">
-                  <h5 className="font-semibold text-sm text-purple-900 dark:text-purple-200 mb-1">
+                  <h5 className="mb-1 text-sm font-semibold text-purple-900 dark:text-purple-200">
                     Pro Tips:
                   </h5>
-                  <ul className="text-xs text-purple-800 dark:text-purple-300 space-y-1">
+                  <ul className="space-y-1 text-xs text-purple-800 dark:text-purple-300">
                     <li>• All spots are within 15 mins of each other</li>
                     <li>• Book transport in advance to save time</li>
-                    <li>• Keep ₹{Math.floor(parseInt(budget) * 0.2)} extra for emergencies</li>
+                    <li>• Keep ${Math.floor(parseInt(budget) * 0.2)} extra for emergencies</li>
                   </ul>
                 </div>
               </div>

@@ -23,7 +23,7 @@ const WhyThisPlanButton = ({ item, type, context }) => {
       const budgetPerNight = context?.budget ? parseInt(context.budget) / parseInt(context.days) : 0;
       
       if (hotelPrice <= budgetPerNight * 1.2) {
-        reasons.push(`fits perfectly in your ₹${context.budget} budget`);
+        reasons.push(`fits perfectly in your $${context.budget} budget`);
       }
       
       const rating = parseFloat(item.rating);
@@ -85,7 +85,7 @@ const WhyThisPlanButton = ({ item, type, context }) => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="text-xs gap-1 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+          className="gap-1 text-xs hover:bg-purple-50 dark:hover:bg-purple-900/20"
         >
           <HelpCircle className="w-3 h-3" />
           Why this?
@@ -103,8 +103,8 @@ const WhyThisPlanButton = ({ item, type, context }) => {
         </DialogHeader>
         
         <div className="space-y-4">
-          <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
-            <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
+          <div className="p-4 border border-purple-200 rounded-lg bg-purple-50 dark:bg-purple-900/20 dark:border-purple-800">
+            <p className="text-sm leading-relaxed text-gray-800 dark:text-gray-200">
               {explanation}
             </p>
           </div>

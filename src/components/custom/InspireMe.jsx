@@ -61,7 +61,7 @@ const InspireMe = ({ onDestinationSelect }) => {
         "matchReason": "why it matches",
         "bestTime": "best months to visit",
         "attractions": ["attraction1", "attraction2", "attraction3"],
-        "budget": "budget range in INR",
+        "budget": "budget range in USD",
         "uniqueExperience": "special highlight",
         "imageKeywords": "keywords for image search",
         "rating": "4.5/5"
@@ -158,7 +158,7 @@ const InspireMe = ({ onDestinationSelect }) => {
         matchReason: "Perfect mountain destination with snow-capped peaks",
         bestTime: "March to June, October to February",
         attractions: ["Rohtang Pass", "Solang Valley", "Hadimba Temple", "Old Manali"],
-        budget: "₹15,000 - ₹25,000 for 3 days",
+        budget: "$185 - $300 for 3 days",
         uniqueExperience: "Paragliding over Solang Valley",
         imageKeywords: "mountains snow adventure",
         rating: "4.6/5"
@@ -169,7 +169,7 @@ const InspireMe = ({ onDestinationSelect }) => {
         matchReason: "Beautiful beaches and vibrant coastal culture",
         bestTime: "November to March",
         attractions: ["Baga Beach", "Dudhsagar Falls", "Old Goa Churches", "Anjuna Market"],
-        budget: "₹12,000 - ₹20,000 for 3 days",
+        budget: "$150 - $240 for 3 days",
         uniqueExperience: "Sunset cruise on Mandovi River",
         imageKeywords: "beach ocean sunset",
         rating: "4.4/5"
@@ -180,7 +180,7 @@ const InspireMe = ({ onDestinationSelect }) => {
         matchReason: "Spiritual destination with river adventures",
         bestTime: "February to May, September to November",
         attractions: ["Laxman Jhula", "Beatles Ashram", "Triveni Ghat", "Neer Garh Waterfall"],
-        budget: "₹8,000 - ₹15,000 for 3 days",
+        budget: "$100 - $185 for 3 days",
         uniqueExperience: "White water rafting in Ganges",
         imageKeywords: "river spiritual mountains",
         rating: "4.5/5"
@@ -220,7 +220,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '6 days',
       destinations: ['Delhi', 'Agra', 'Jaipur'],
       theme: 'Heritage & Culture',
-      budget: '₹25,000 - ₹45,000',
+      budget: '$300 - $550',
       bestTime: 'Oct - Mar',
       highlights: ['Taj Mahal', 'Red Fort', 'Hawa Mahal', 'Amber Fort'],
       description: 'Experience India\'s most iconic heritage circuit with magnificent palaces, forts, and the world-famous Taj Mahal.',
@@ -234,7 +234,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '5 days',
       destinations: ['Kochi', 'Alleppey', 'Munnar'],
       theme: 'Nature & Relaxation',
-      budget: '₹20,000 - ₹35,000',
+      budget: '$240 - $425',
       bestTime: 'Sep - May',
       highlights: ['Houseboat Stay', 'Tea Plantations', 'Spice Gardens', 'Kathakali Dance'],
       description: 'Cruise through serene backwaters, explore lush tea gardens, and experience Kerala\'s rich cultural heritage.',
@@ -248,7 +248,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '8 days',
       destinations: ['Jaipur', 'Udaipur', 'Jodhpur', 'Jaisalmer'],
       theme: 'Heritage & Luxury',
-      budget: '₹40,000 - ₹80,000',
+      budget: '$485 - $970',
       bestTime: 'Oct - Mar',
       highlights: ['City Palace', 'Lake Pichola', 'Mehrangarh Fort', 'Desert Safari'],
       description: 'Live like royalty in magnificent palaces, explore desert landscapes, and witness Rajasthan\'s vibrant culture.',
@@ -262,7 +262,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '7 days',
       destinations: ['Manali', 'Kasol', 'Tosh', 'Kheerganga'],
       theme: 'Adventure & Mountains',
-      budget: '₹18,000 - ₹30,000',
+      budget: '$220 - $365',
       bestTime: 'Mar - Jun, Sep - Nov',
       highlights: ['Paragliding', 'Trekking', 'River Rafting', 'Camping'],
       description: 'Thrilling adventures in the Himalayas with trekking, paragliding, and stunning mountain landscapes.',
@@ -276,7 +276,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '4 days',
       destinations: ['North Goa', 'South Goa'],
       theme: 'Beach & Nightlife',
-      budget: '₹15,000 - ₹25,000',
+      budget: '$185 - $300',
       bestTime: 'Nov - Feb',
       highlights: ['Beach Parties', 'Water Sports', 'Portuguese Architecture', 'Seafood'],
       description: 'Relax on pristine beaches, enjoy vibrant nightlife, and explore Goa\'s unique Indo-Portuguese culture.',
@@ -290,7 +290,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '9 days',
       destinations: ['Chennai', 'Madurai', 'Thanjavur', 'Pondicherry'],
       theme: 'Spiritual & Cultural',
-      budget: '₹22,000 - ₹38,000',
+      budget: '$265 - $460',
       bestTime: 'Oct - Mar',
       highlights: ['Meenakshi Temple', 'Brihadeeswarar Temple', 'French Quarter', 'Classical Dance'],
       description: 'Discover South India\'s magnificent temples, classical arts, and diverse cultural heritage.',
@@ -304,7 +304,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '10 days',
       destinations: ['Guwahati', 'Shillong', 'Cherrapunji', 'Kaziranga'],
       theme: 'Nature & Wildlife',
-      budget: '₹30,000 - ₹50,000',
+      budget: '$365 - $605',
       bestTime: 'Oct - Apr',
       highlights: ['Living Root Bridges', 'Rhino Safari', 'Waterfalls', 'Tribal Culture'],
       description: 'Explore India\'s hidden gem with unique landscapes, diverse wildlife, and rich tribal heritage.',
@@ -318,7 +318,7 @@ const InspireMe = ({ onDestinationSelect }) => {
       duration: '8 days',
       destinations: ['Leh', 'Nubra Valley', 'Pangong Lake', 'Khardung La'],
       theme: 'Adventure & Mountains',
-      budget: '₹35,000 - ₹55,000',
+      budget: '$425 - $665',
       bestTime: 'May - Sep',
       highlights: ['Highest Motorable Road', 'Magnetic Hill', 'Monasteries', 'Desert Safari'],
       description: 'Experience the roof of the world with breathtaking landscapes, ancient monasteries, and unique culture.',
@@ -356,13 +356,13 @@ const InspireMe = ({ onDestinationSelect }) => {
         </CardHeader>
         <CardContent>
           {/* Trip Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+          <div className="grid grid-cols-2 gap-4 p-4 mb-6 rounded-lg md:grid-cols-4 bg-gradient-to-r from-blue-50 to-purple-50">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">{curatedTrips.length}</div>
               <div className="text-xs text-gray-600">Curated Trips</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">₹15K+</div>
+              <div className="text-2xl font-bold text-green-600">$185+</div>
               <div className="text-xs text-gray-600">Starting From</div>
             </div>
             <div className="text-center">
@@ -399,21 +399,21 @@ const InspireMe = ({ onDestinationSelect }) => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {getFilteredTrips().map((trip) => (
               <Card 
                 key={trip.id} 
-                className="cursor-pointer hover:shadow-lg transition-all group"
+                className="transition-all cursor-pointer hover:shadow-lg group"
                 onClick={() => handleCuratedTripSelect(trip)}
               >
                 <div className="relative">
                   <img 
                     src={trip.image} 
                     alt={trip.title}
-                    className="w-full h-32 object-cover rounded-t-lg group-hover:scale-105 transition-transform"
+                    className="object-cover w-full h-32 transition-transform rounded-t-lg group-hover:scale-105"
                   />
                   <div className="absolute top-2 right-2">
-                    <Badge className="bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-gray-200 text-xs">
+                    <Badge className="text-xs text-gray-800 bg-white/90 dark:bg-gray-800/90 dark:text-gray-200">
                       {trip.duration}
                     </Badge>
                   </div>
@@ -425,8 +425,8 @@ const InspireMe = ({ onDestinationSelect }) => {
                 </div>
                 
                 <CardContent className="p-3">
-                  <h3 className="font-semibold text-sm mb-1">{trip.title}</h3>
-                  <p className="text-xs text-gray-600 mb-2">{trip.description}</p>
+                  <h3 className="mb-1 text-sm font-semibold">{trip.title}</h3>
+                  <p className="mb-2 text-xs text-gray-600">{trip.description}</p>
                   
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs">
@@ -487,22 +487,22 @@ const InspireMe = ({ onDestinationSelect }) => {
           </p>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             {/* Current month recommendations */}
             {curatedTrips.slice(0, 4).map((trip) => (
               <div 
                 key={`seasonal-${trip.id}`}
-                className="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors dark:border-gray-700"
+                className="flex items-center gap-3 p-3 transition-colors border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 dark:border-gray-700"
                 onClick={() => handleCuratedTripSelect(trip)}
               >
                 <img 
                   src={trip.image} 
                   alt={trip.title}
-                  className="w-16 h-16 object-cover rounded-lg"
+                  className="object-cover w-16 h-16 rounded-lg"
                 />
                 <div className="flex-1">
-                  <h4 className="font-medium text-sm">{trip.title}</h4>
-                  <p className="text-xs text-gray-600 mb-1">{trip.destinations.join(', ')}</p>
+                  <h4 className="text-sm font-medium">{trip.title}</h4>
+                  <p className="mb-1 text-xs text-gray-600">{trip.destinations.join(', ')}</p>
                   <div className="flex items-center gap-2">
                     <Badge variant="outline" className="text-xs">{trip.duration}</Badge>
                     <Badge variant="secondary" className="text-xs">{trip.budget.split(' - ')[0]}</Badge>
@@ -529,7 +529,7 @@ const InspireMe = ({ onDestinationSelect }) => {
           </p>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
               { name: 'Manali', bookings: '2.3K', trend: '+15%', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200' },
               { name: 'Goa', bookings: '1.8K', trend: '+8%', image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=200' },
@@ -538,7 +538,7 @@ const InspireMe = ({ onDestinationSelect }) => {
             ].map((dest, index) => (
               <div 
                 key={index}
-                className="relative group cursor-pointer"
+                className="relative cursor-pointer group"
                 onClick={() => {
                   const destination = { label: dest.name, value: dest.name };
                   if (onDestinationSelect) onDestinationSelect(destination);
@@ -548,13 +548,13 @@ const InspireMe = ({ onDestinationSelect }) => {
                 <img 
                   src={dest.image} 
                   alt={dest.name}
-                  className="w-full h-24 object-cover rounded-lg group-hover:scale-105 transition-transform"
+                  className="object-cover w-full h-24 transition-transform rounded-lg group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/40 rounded-lg flex flex-col justify-end p-2">
-                  <h4 className="text-white font-medium text-sm">{dest.name}</h4>
+                <div className="absolute inset-0 flex flex-col justify-end p-2 rounded-lg bg-black/40">
+                  <h4 className="text-sm font-medium text-white">{dest.name}</h4>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-white/80">{dest.bookings} bookings</span>
-                    <Badge className="bg-green-500 text-white text-xs">{dest.trend}</Badge>
+                    <Badge className="text-xs text-white bg-green-500">{dest.trend}</Badge>
                   </div>
                 </div>
               </div>
@@ -575,13 +575,13 @@ const InspireMe = ({ onDestinationSelect }) => {
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Image Upload */}
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+          <div className="p-6 text-center border-2 border-gray-300 border-dashed rounded-lg">
             {uploadedImage ? (
               <div className="space-y-3">
                 <img 
                   src={uploadedImage} 
                   alt="Uploaded" 
-                  className="max-h-48 mx-auto rounded-lg"
+                  className="mx-auto rounded-lg max-h-48"
                 />
                 <Button 
                   variant="outline" 
@@ -592,7 +592,7 @@ const InspireMe = ({ onDestinationSelect }) => {
               </div>
             ) : (
               <div className="space-y-3">
-                <Upload className="w-12 h-12 text-gray-400 mx-auto" />
+                <Upload className="w-12 h-12 mx-auto text-gray-400" />
                 <div>
                   <p className="text-lg font-medium">Upload an inspiring image</p>
                   <p className="text-sm text-gray-500">
@@ -667,14 +667,14 @@ const InspireMe = ({ onDestinationSelect }) => {
       {suggestions.length > 0 && (
         <div className="space-y-4">
           <h3 className="text-xl font-semibold">Inspired Destinations for You</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             {suggestions.map((destination, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+              <Card key={index} className="transition-shadow hover:shadow-lg">
                 <CardContent className="p-4">
                   <div className="space-y-3">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="font-semibold text-lg flex items-center gap-2">
+                        <h4 className="flex items-center gap-2 text-lg font-semibold">
                           <MapPin className="w-4 h-4 text-red-500" />
                           {destination.name}
                         </h4>
@@ -686,7 +686,7 @@ const InspireMe = ({ onDestinationSelect }) => {
                       </div>
                     </div>
 
-                    <p className="text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded">
+                    <p className="p-2 text-sm text-blue-600 rounded dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20">
                       💡 {destination.matchReason}
                     </p>
 
@@ -713,9 +713,9 @@ const InspireMe = ({ onDestinationSelect }) => {
                         </div>
                       </div>
 
-                      <div className="bg-yellow-50 p-2 rounded">
+                      <div className="p-2 rounded bg-yellow-50">
                         <span className="font-medium text-yellow-800">✨ Unique Experience:</span>
-                        <p className="text-yellow-700 text-xs mt-1">{destination.uniqueExperience}</p>
+                        <p className="mt-1 text-xs text-yellow-700">{destination.uniqueExperience}</p>
                       </div>
                     </div>
 

@@ -22,17 +22,17 @@ function Flights({ trip }) {
     const budgetRanges = {
       budget: { 
         airlines: ['IndiGo', 'SpiceJet', 'GoFirst'],
-        priceRange: [2500, 6000],
+        priceRange: [30, 75],
         class: 'Economy'
       },
       moderate: { 
         airlines: ['Air India', 'Vistara', 'IndiGo'],
-        priceRange: [4000, 12000],
+        priceRange: [50, 150],
         class: 'Economy/Premium Economy'
       },
       luxury: { 
         airlines: ['Vistara', 'Air India', 'Emirates'],
-        priceRange: [8000, 25000],
+        priceRange: [100, 300],
         class: 'Business/First Class'
       }
     };
@@ -42,9 +42,9 @@ function Flights({ trip }) {
     if (userBudgetAmount && userBudgetAmount > 0) {
       const flightBudget = userBudgetAmount * 0.3; // 30% for flights
       
-      if (flightBudget < 8000) {
+      if (flightBudget < 100) {
         selectedRange = budgetRanges.budget;
-      } else if (flightBudget < 20000) {
+      } else if (flightBudget < 250) {
         selectedRange = budgetRanges.moderate;
       } else {
         selectedRange = budgetRanges.luxury;
@@ -64,7 +64,7 @@ function Flights({ trip }) {
       return {
         airline: airline,
         flightNumber: `${getAirlineCode(airline)}${Math.floor(Math.random() * 9000) + 1000}`,
-        price: `₹${basePrice.toLocaleString()}`,
+        price: `$${basePrice.toLocaleString()}`,
         class: selectedRange.class,
         departure: flightTime.departure,
         arrival: flightTime.arrival,
@@ -125,23 +125,23 @@ function Flights({ trip }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-bold text-2xl text-gray-800 dark:text-gray-100">✈️ Flight Options</h2>
-        <div className="text-sm text-gray-600 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">✈️ Flight Options</h2>
+        <div className="px-3 py-1 text-sm text-gray-600 rounded-full dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30">
           {flightOptions.length} flights • {budget} budget
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {flightOptions.map((flight, index) => (
           <div key={index} className="relative">
             <FlightCardItem flight={flight} />
             {index === 0 && (
-              <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute px-2 py-1 text-xs text-white bg-blue-500 rounded-full -top-2 -right-2">
                 Best Price
               </div>
             )}
             {index === 1 && (
-              <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute px-2 py-1 text-xs text-white bg-green-500 rounded-full -top-2 -right-2">
                 Recommended
               </div>
             )}
@@ -149,8 +149,8 @@ function Flights({ trip }) {
         ))}
       </div>
       
-      <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+      <div className="p-3 mt-3 rounded-lg bg-gray-50 dark:bg-gray-800">
+        <p className="text-sm text-center text-gray-600 dark:text-gray-300">
           ✈️ <strong>Tip:</strong> Book flights 2-3 weeks in advance for better deals. Check baggage policies before booking.
         </p>
       </div>

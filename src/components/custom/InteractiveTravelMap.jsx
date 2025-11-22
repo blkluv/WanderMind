@@ -17,7 +17,7 @@ const InteractiveTravelMap = () => {
       position: { top: '65%', left: '15%' },
       type: 'Beach Paradise',
       rating: 4.8,
-      price: '₹15K',
+      price: '$185',
       image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=200',
       highlights: ['Beaches', 'Nightlife', 'Portuguese Culture']
     },
@@ -27,7 +27,7 @@ const InteractiveTravelMap = () => {
       position: { top: '45%', left: '25%' },
       type: 'Royal Heritage',
       rating: 4.9,
-      price: '₹25K',
+      price: '$300',
       image: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?w=200',
       highlights: ['Palaces', 'Desert Safari', 'Culture']
     },
@@ -37,7 +37,7 @@ const InteractiveTravelMap = () => {
       position: { top: '75%', left: '20%' },
       type: 'Backwaters',
       rating: 4.7,
-      price: '₹20K',
+      price: '$240',
       image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=200',
       highlights: ['Houseboats', 'Tea Gardens', 'Ayurveda']
     },
@@ -47,7 +47,7 @@ const InteractiveTravelMap = () => {
       position: { top: '25%', left: '30%' },
       type: 'Mountain Adventure',
       rating: 4.6,
-      price: '₹18K',
+      price: '$220',
       image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200',
       highlights: ['Trekking', 'Paragliding', 'Snow']
     },
@@ -57,7 +57,7 @@ const InteractiveTravelMap = () => {
       position: { top: '35%', left: '32%' },
       type: 'Capital Heritage',
       rating: 4.5,
-      price: '₹12K',
+      price: '$150',
       image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?w=200',
       highlights: ['Red Fort', 'India Gate', 'Street Food']
     },
@@ -67,7 +67,7 @@ const InteractiveTravelMap = () => {
       position: { top: '30%', left: '70%' },
       type: 'Hidden Gems',
       rating: 4.8,
-      price: '₹30K',
+      price: '$365',
       image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=200',
       highlights: ['Living Bridges', 'Wildlife', 'Culture']
     }
@@ -84,7 +84,7 @@ const InteractiveTravelMap = () => {
   };
 
   return (
-    <div className="relative w-full h-96 bg-gradient-to-br from-blue-100 via-green-50 to-orange-50 dark:from-blue-900 dark:via-green-900 dark:to-orange-900 rounded-2xl overflow-hidden shadow-lg">
+    <div className="relative w-full overflow-hidden shadow-lg h-96 bg-gradient-to-br from-blue-100 via-green-50 to-orange-50 dark:from-blue-900 dark:via-green-900 dark:to-orange-900 rounded-2xl">
       {/* Background Map Illustration */}
       <div className="absolute inset-0 opacity-20">
         <svg viewBox="0 0 400 300" className="w-full h-full">
@@ -126,17 +126,17 @@ const InteractiveTravelMap = () => {
             />
             
             {/* Pulsing Ring */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-red-500 rounded-full animate-ping opacity-75"></div>
+            <div className="absolute w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full opacity-75 top-1/2 left-1/2 animate-ping"></div>
           </div>
 
           {/* Hover Card */}
           {hoveredDestination?.id === destination.id && (
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 p-3 z-10 animate-in slide-in-from-bottom-2">
+            <div className="absolute z-10 w-64 p-3 mb-2 transform -translate-x-1/2 bg-white border border-gray-200 rounded-lg shadow-xl bottom-full left-1/2 dark:bg-gray-800 dark:border-gray-700 animate-in slide-in-from-bottom-2">
               <div className="flex items-start gap-3">
                 <img 
                   src={destination.image} 
                   alt={destination.name}
-                  className="w-16 h-16 object-cover rounded-lg"
+                  className="object-cover w-16 h-16 rounded-lg"
                 />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900 dark:text-white">{destination.name}</h3>
@@ -172,7 +172,7 @@ const InteractiveTravelMap = () => {
 
       {/* Interactive Elements - Positioned higher to avoid overlap */}
       <div className="absolute bottom-16 left-4 right-4">
-        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
+        <div className="p-3 rounded-lg shadow-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Camera className="w-5 h-5 text-blue-500" />
@@ -180,7 +180,7 @@ const InteractiveTravelMap = () => {
                 Click on any destination to start planning
               </span>
             </div>
-            <Badge className="bg-green-500 text-white">
+            <Badge className="text-white bg-green-500">
               {destinations.length} Destinations
             </Badge>
           </div>
@@ -189,16 +189,16 @@ const InteractiveTravelMap = () => {
 
       {/* Selected Destination Overlay */}
       {selectedDestination && (
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-sm mx-4 text-center animate-in zoom-in-95">
-            <div className="text-4xl mb-3">🎉</div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/50">
+          <div className="max-w-sm p-6 mx-4 text-center bg-white dark:bg-gray-800 rounded-xl animate-in zoom-in-95">
+            <div className="mb-3 text-4xl">🎉</div>
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
               Great Choice!
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
+            <p className="mb-4 text-gray-600 dark:text-gray-300">
               You've selected {selectedDestination.name}. Redirecting to trip planner...
             </p>
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
+            <div className="w-6 h-6 mx-auto border-b-2 border-blue-500 rounded-full animate-spin"></div>
           </div>
         </div>
       )}

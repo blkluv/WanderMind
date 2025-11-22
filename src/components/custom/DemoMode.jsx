@@ -10,7 +10,7 @@ import {
   MapPin, 
   Calendar, 
   Users, 
-  IndianRupee,
+  DollarSign,
   CheckCircle
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -27,7 +27,7 @@ const DemoMode = ({ feature, onComplete }) => {
       steps: [
         { 
           title: 'Input Analysis', 
-          description: 'AI analyzes: Delhi, 3 days, ₹15,000 budget, Heritage Explorer persona',
+          description: 'AI analyzes: Delhi, 3 days, $185 budget, Heritage Explorer persona',
           duration: 2000 
         },
         { 
@@ -37,7 +37,7 @@ const DemoMode = ({ feature, onComplete }) => {
         },
         { 
           title: 'Budget Allocation', 
-          description: 'Smart budget: ₹6,000 hotels, ₹4,500 food, ₹3,000 transport, ₹1,500 activities',
+          description: 'Smart budget: $75 hotels, $55 food, $37 transport, $18 activities',
           duration: 2000 
         },
         { 
@@ -120,7 +120,7 @@ const DemoMode = ({ feature, onComplete }) => {
       steps: [
         { 
           title: 'Trip Selection', 
-          description: 'Selected: 3 hotels, 2 cabs, 4 activities - Total: ₹14,750',
+          description: 'Selected: 3 hotels, 2 cabs, 4 activities - Total: $180',
           duration: 1500 
         },
         { 
@@ -140,7 +140,7 @@ const DemoMode = ({ feature, onComplete }) => {
         },
         { 
           title: 'Trip Ready', 
-          description: '🎉 Complete trip booked! Saved ₹2,250 with smart recommendations',
+          description: '🎉 Complete trip booked! Saved $27 with smart recommendations',
           duration: 1000 
         }
       ]
@@ -220,9 +220,9 @@ const DemoMode = ({ feature, onComplete }) => {
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full h-2 bg-gray-200 rounded-full">
           <div 
-            className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+            className="h-2 transition-all duration-300 bg-blue-500 rounded-full"
             style={{ 
               width: `${((currentStep + (isCompleted ? 1 : 0)) / currentDemo.steps.length) * 100}%` 
             }}
@@ -274,7 +274,7 @@ const DemoMode = ({ feature, onComplete }) => {
 
         {/* Demo Results */}
         {isCompleted && (
-          <Card className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700">
+          <Card className="border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-700">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <CheckCircle className="w-8 h-8 text-green-600" />
@@ -285,7 +285,7 @@ const DemoMode = ({ feature, onComplete }) => {
                   </p>
                 </div>
               </div>
-              <div className="mt-4 flex gap-2">
+              <div className="flex gap-2 mt-4">
                 <Button 
                   onClick={() => onComplete && onComplete(feature)}
                   className="bg-green-600 hover:bg-green-700"
@@ -302,23 +302,23 @@ const DemoMode = ({ feature, onComplete }) => {
 
         {/* Feature Benefits */}
         <div className="grid grid-cols-2 gap-4 text-center">
-          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-            <div className="text-2xl mb-1">⚡</div>
+          <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
+            <div className="mb-1 text-2xl">⚡</div>
             <div className="text-sm font-medium">Lightning Fast</div>
             <div className="text-xs text-gray-600">Results in seconds</div>
           </div>
-          <div className="p-3 bg-purple-50 rounded-lg">
-            <div className="text-2xl mb-1">🎯</div>
+          <div className="p-3 rounded-lg bg-purple-50">
+            <div className="mb-1 text-2xl">🎯</div>
             <div className="text-sm font-medium">Highly Accurate</div>
             <div className="text-xs text-gray-600">AI-powered precision</div>
           </div>
-          <div className="p-3 bg-green-50 rounded-lg">
-            <div className="text-2xl mb-1">💰</div>
+          <div className="p-3 rounded-lg bg-green-50">
+            <div className="mb-1 text-2xl">💰</div>
             <div className="text-sm font-medium">Cost Effective</div>
             <div className="text-xs text-gray-600">Save 15-25% on trips</div>
           </div>
-          <div className="p-3 bg-orange-50 rounded-lg">
-            <div className="text-2xl mb-1">🌟</div>
+          <div className="p-3 rounded-lg bg-orange-50">
+            <div className="mb-1 text-2xl">🌟</div>
             <div className="text-sm font-medium">Personalized</div>
             <div className="text-xs text-gray-600">Tailored to you</div>
           </div>

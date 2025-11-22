@@ -58,9 +58,9 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
       category: 'accommodation',
       name: 'The Grand Heritage Hotel',
       description: '3 nights stay in Deluxe Room',
-      price: 12000,
-      originalPrice: 15000,
-      savings: 3000,
+      price: 150,
+      originalPrice: 185,
+      savings: 35,
       rating: 4.5,
       amenities: ['Free WiFi', 'Breakfast', 'Pool', 'Spa'],
       cancellation: 'Free cancellation till 24 hours',
@@ -72,9 +72,9 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
       category: 'transport',
       name: 'Airport Transfer + Local Sightseeing',
       description: 'AC Cab for 3 days with driver',
-      price: 8500,
-      originalPrice: 10000,
-      savings: 1500,
+      price: 105,
+      originalPrice: 120,
+      savings: 15,
       rating: 4.3,
       features: ['AC Vehicle', 'English Speaking Driver', 'Fuel Included'],
       cancellation: 'Free cancellation till 2 hours',
@@ -86,9 +86,9 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
       category: 'activities',
       name: 'Heritage Walking Tour + Cooking Class',
       description: 'Guided tour with authentic cooking experience',
-      price: 3500,
-      originalPrice: 4000,
-      savings: 500,
+      price: 43,
+      originalPrice: 50,
+      savings: 7,
       rating: 4.8,
       features: ['Expert Guide', 'All Materials', 'Certificate', 'Lunch'],
       cancellation: 'Free cancellation till 6 hours',
@@ -170,7 +170,7 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
               </Badge>
             </div>
             
-            <p className="text-sm text-gray-600 mb-2">{item.description}</p>
+            <p className="mb-2 text-sm text-gray-600">{item.description}</p>
             
             <div className="flex flex-wrap gap-1 mb-3">
               {(item.amenities || item.features || []).slice(0, 3).map((feature, index) => (
@@ -188,20 +188,20 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
 
           <div className="text-right">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-lg font-bold text-green-600">₹{item.price.toLocaleString()}</span>
+              <span className="text-lg font-bold text-green-600">${item.price.toLocaleString()}</span>
               {selectedItems.includes(item.id) && (
                 <CheckCircle className="w-5 h-5 text-blue-500" />
               )}
             </div>
             {item.savings > 0 && (
               <div className="text-xs">
-                <span className="line-through text-gray-400">₹{item.originalPrice.toLocaleString()}</span>
-                <span className="text-green-600 ml-1">Save ₹{item.savings.toLocaleString()}</span>
+                <span className="text-gray-400 line-through">${item.originalPrice.toLocaleString()}</span>
+                <span className="ml-1 text-green-600">Save ${item.savings.toLocaleString()}</span>
               </div>
             )}
             <Badge 
               variant={item.priority === 'high' ? 'default' : 'secondary'}
-              className="text-xs mt-1"
+              className="mt-1 text-xs"
             >
               {item.priority === 'high' ? 'Recommended' : 'Optional'}
             </Badge>
@@ -215,13 +215,13 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
     return (
       <Card className="max-w-2xl mx-auto">
         <CardContent className="p-8 text-center">
-          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-green-600 mb-2">Booking Confirmed!</h2>
-          <p className="text-gray-600 mb-4">
+          <CheckCircle className="w-16 h-16 mx-auto mb-4 text-green-500" />
+          <h2 className="mb-2 text-2xl font-bold text-green-600">Booking Confirmed!</h2>
+          <p className="mb-4 text-gray-600">
             Your trip has been successfully booked. Confirmation details have been sent to your email.
           </p>
           
-          <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mb-6">
+          <div className="p-4 mb-6 rounded-lg bg-gray-50 dark:bg-gray-800">
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="font-medium">Booking ID:</span>
@@ -229,7 +229,7 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
               </div>
               <div>
                 <span className="font-medium">Total Amount:</span>
-                <p className="text-green-600 font-bold">₹{getSelectedTotal().toLocaleString()}</p>
+                <p className="font-bold text-green-600">${getSelectedTotal().toLocaleString()}</p>
               </div>
               <div>
                 <span className="font-medium">Items Booked:</span>
@@ -237,7 +237,7 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
               </div>
               <div>
                 <span className="font-medium">Total Savings:</span>
-                <p className="text-green-600">₹{getTotalSavings().toLocaleString()}</p>
+                <p className="text-green-600">${getTotalSavings().toLocaleString()}</p>
               </div>
             </div>
           </div>
@@ -292,7 +292,7 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
 
       {/* Booking Summary */}
       {selectedItems.length > 0 && (
-        <Card className="sticky bottom-4 bg-white dark:bg-gray-800 shadow-lg border-2 border-blue-200 dark:border-blue-700">
+        <Card className="sticky bg-white border-2 border-blue-200 shadow-lg bottom-4 dark:bg-gray-800 dark:border-blue-700">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -304,11 +304,11 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
               
               <div className="text-right">
                 <div className="text-2xl font-bold text-green-600">
-                  ₹{getSelectedTotal().toLocaleString()}
+                  ${getSelectedTotal().toLocaleString()}
                 </div>
                 {getTotalSavings() > 0 && (
                   <div className="text-sm text-green-600">
-                    You save ₹{getTotalSavings().toLocaleString()}
+                    You save ${getTotalSavings().toLocaleString()}
                   </div>
                 )}
               </div>
@@ -342,7 +342,7 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
           <CardTitle className="text-lg">Payment Options</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
               { id: 'card', name: 'Credit/Debit Card', icon: '💳' },
               { id: 'upi', name: 'UPI', icon: '📱' },
@@ -358,7 +358,7 @@ const BookingSystem = ({ tripData, onBookingComplete }) => {
                     : 'hover:border-gray-300 dark:hover:border-gray-600 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100'
                 }`}
               >
-                <div className="text-2xl mb-1">{method.icon}</div>
+                <div className="mb-1 text-2xl">{method.icon}</div>
                 <div className="text-sm font-medium">{method.name}</div>
               </div>
             ))}

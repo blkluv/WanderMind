@@ -22,9 +22,9 @@ function Hotels({ trip }) {
   // Generate budget-appropriate hotel options (3-4 hotels)
   const generateBudgetAppropriateHotels = (existingHotels, destination, budget, userBudgetAmount) => {
     const budgetRanges = {
-      budget: { min: 1200, max: 2800, types: ['Budget Hotel', 'Hostel', 'Guest House', 'Lodge'] },
-      moderate: { min: 2500, max: 5500, types: ['3-Star Hotel', 'Business Hotel', 'Boutique Hotel', 'Resort'] },
-      luxury: { min: 5000, max: 12000, types: ['4-Star Hotel', '5-Star Resort', 'Luxury Hotel', 'Premium Resort'] }
+      budget: { min: 15, max: 35, types: ['Budget Hotel', 'Hostel', 'Guest House', 'Lodge'] },
+      moderate: { min: 30, max: 70, types: ['3-Star Hotel', 'Business Hotel', 'Boutique Hotel', 'Resort'] },
+      luxury: { min: 60, max: 150, types: ['4-Star Hotel', '5-Star Resort', 'Luxury Hotel', 'Premium Resort'] }
     };
     
     // If user provided specific budget amount, adjust ranges accordingly
@@ -33,9 +33,9 @@ function Hotels({ trip }) {
       const dailyBudget = userBudgetAmount / 7; // Assume 7 days average
       const hotelBudget = dailyBudget * 0.35; // 35% for accommodation
       
-      if (hotelBudget < 2000) {
+      if (hotelBudget < 25) {
         range = budgetRanges.budget;
-      } else if (hotelBudget < 4000) {
+      } else if (hotelBudget < 50) {
         range = budgetRanges.moderate;
       } else {
         range = budgetRanges.luxury;
@@ -58,8 +58,8 @@ function Hotels({ trip }) {
       allHotels.push({
         hotelName: `${hotelType} ${destination || 'Central'} ${i + 1}`,
         hotelAddress: `${destination || 'City'} - ${getLocationVariant(i)}`,
-        price: `₹${finalPrice.toLocaleString()}`,
-        pricePerNight: `₹${finalPrice.toLocaleString()}`,
+        price: `$${finalPrice.toLocaleString()}`,
+        pricePerNight: `$${finalPrice.toLocaleString()}`,
         rating: rating,
         hotelImageUrl: null,
         amenities: getHotelAmenities(budget, i),
@@ -122,12 +122,12 @@ function Hotels({ trip }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-bold text-2xl text-gray-800 dark:text-gray-100">🏨 Hotel Recommendations</h2>
-        <div className="text-sm text-gray-600 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">🏨 Hotel Recommendations</h2>
+        <div className="px-3 py-1 text-sm text-gray-600 rounded-full dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30">
           {finalHotels.length} options • {budget} budget
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {finalHotels.map((hotel, index) => (
           <div key={index} className="relative">
             <HotelCardItem 
@@ -139,20 +139,20 @@ function Hotels({ trip }) {
               }}
             />
             {index === 0 && (
-              <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute px-2 py-1 text-xs text-white bg-green-500 rounded-full -top-2 -right-2">
                 Best Value
               </div>
             )}
             {index === 1 && budget === 'moderate' && (
-              <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute px-2 py-1 text-xs text-white bg-blue-500 rounded-full -top-2 -right-2">
                 Recommended
               </div>
             )}
           </div>
         ))}
       </div>
-      <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+      <div className="p-3 mt-3 rounded-lg bg-gray-50 dark:bg-gray-800">
+        <p className="text-sm text-center text-gray-600 dark:text-gray-300">
           💡 <strong>Tip:</strong> Prices shown are per night. Book early for better rates and availability.
         </p>
       </div>

@@ -22,9 +22,9 @@ function PlacesToVisit({ trip }) {
   // Generate additional activity options based on budget
   const generateAdditionalActivities = (existingActivities, destination, budget, dayIndex) => {
     const budgetRanges = {
-      budget: { min: 0, max: 500, activities: ['Free Walking Tour', 'Local Market Visit', 'Public Garden', 'Street Food Tour'] },
-      moderate: { min: 200, max: 1200, activities: ['Guided Tour', 'Museum Visit', 'Cultural Show', 'Adventure Activity'] },
-      luxury: { min: 800, max: 3000, activities: ['Private Tour', 'Fine Dining', 'Spa Experience', 'Helicopter Tour'] }
+      budget: { min: 0, max: 6, activities: ['Free Walking Tour', 'Local Market Visit', 'Public Garden', 'Street Food Tour'] },
+      moderate: { min: 2, max: 15, activities: ['Guided Tour', 'Museum Visit', 'Cultural Show', 'Adventure Activity'] },
+      luxury: { min: 10, max: 38, activities: ['Private Tour', 'Fine Dining', 'Spa Experience', 'Helicopter Tour'] }
     };
     
     const range = budgetRanges[budget] || budgetRanges.moderate;
@@ -40,7 +40,7 @@ function PlacesToVisit({ trip }) {
       allActivities.push({
         placeName: `${activityType} - ${destination || 'Local Area'} ${i + 1}`,
         placeDetails: getActivityDescription(activityType, destination, budget),
-        ticketPricing: basePrice > 0 ? `₹${basePrice.toLocaleString()}` : 'Free',
+        ticketPricing: basePrice > 0 ? `$${basePrice.toLocaleString()}` : 'Free',
         rating: rating,
         travelTime: getRandomTravelTime(),
         bestTimetoVisit: getRandomTimeSlot(dayIndex),
@@ -135,7 +135,7 @@ function PlacesToVisit({ trip }) {
 
   return (
     <div>
-      <h2 className="font-bold text-2xl mb-4 text-gray-800 dark:text-gray-100">
+      <h2 className="mb-4 text-2xl font-bold text-gray-800 dark:text-gray-100">
         🎯 Places to Visit
       </h2>
 
@@ -158,25 +158,25 @@ function PlacesToVisit({ trip }) {
           return (
             <div key={index} className="mb-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className='font-medium text-xl text-blue-600 dark:text-blue-400'>
+                <h2 className='text-xl font-medium text-blue-600 dark:text-blue-400'>
                   Day {item.day || index + 1} Activities
                 </h2>
-                <div className="text-sm text-gray-600 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+                <div className="px-3 py-1 text-sm text-gray-600 rounded-full dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30">
                   {finalActivities.length} activities • {tripBudget} budget
                 </div>
               </div>
               
-              <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
+              <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
                 {finalActivities.map((place, placeIndex) => (
                   <div key={placeIndex} className="relative">
                     <PlaceCardItem place={place} />
                     {placeIndex === 0 && (
-                      <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
+                      <div className="absolute px-2 py-1 text-xs text-white bg-orange-500 rounded-full -top-2 -right-2">
                         Must Visit
                       </div>
                     )}
                     {place.activityType && (
-                      <div className="absolute -top-2 -left-2 bg-purple-500 text-white text-xs px-2 py-1 rounded-full">
+                      <div className="absolute px-2 py-1 text-xs text-white bg-purple-500 rounded-full -top-2 -left-2">
                         {place.activityType.split(' ')[0]}
                       </div>
                     )}
@@ -184,7 +184,7 @@ function PlacesToVisit({ trip }) {
                 ))}
               </div>
               
-              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="p-3 mt-3 rounded-lg bg-gray-50 dark:bg-gray-800">
                 <p className="text-sm text-gray-600 dark:text-gray-300">
                   💡 <strong>Day {item.day || index + 1} Tip:</strong> Start early to make the most of your day. Consider travel time between activities.
                 </p>

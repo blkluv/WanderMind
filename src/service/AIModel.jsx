@@ -54,7 +54,7 @@ const generateDemoTrip = (location, days, traveler, budget) => {
       {
         hotelName: `${destinationName} Grand Hotel`,
         hotelAddress: `123 Main Street, ${destinationName}`,
-        price: budget === 'Cheap' ? '₹2,000 - ₹3,500 per night' : budget === 'Moderate' ? '₹4,000 - ₹7,000 per night' : '₹8,000 - ₹15,000 per night',
+        price: budget === 'Cheap' ? '$25 - $45 per night' : budget === 'Moderate' ? '$50 - $90 per night' : '$100 - $185 per night',
         hotelImageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400',
         geoCoordinates: { latitude: 28.6139, longitude: 77.2090 },
         rating: '4.2 stars',
@@ -63,7 +63,7 @@ const generateDemoTrip = (location, days, traveler, budget) => {
       {
         hotelName: `${destinationName} Palace`,
         hotelAddress: `456 Heritage Road, ${destinationName}`,
-        price: budget === 'Cheap' ? '₹1,800 - ₹3,000 per night' : budget === 'Moderate' ? '₹3,500 - ₹6,000 per night' : '₹7,000 - ₹12,000 per night',
+        price: budget === 'Cheap' ? '$22 - $38 per night' : budget === 'Moderate' ? '$45 - $75 per night' : '$90 - $150 per night',
         hotelImageUrl: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400',
         geoCoordinates: { latitude: 28.6129, longitude: 77.2095 },
         rating: '4.0 stars',
@@ -78,7 +78,7 @@ const generateDemoTrip = (location, days, traveler, budget) => {
           placeDetails: `Explore the rich history and culture of ${destinationName} with guided tours and local experiences.`,
           placeImageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=400',
           geoCoordinates: { latitude: 28.6139, longitude: 77.2090 },
-          ticketPricing: budget === 'Cheap' ? '₹200 per person' : budget === 'Moderate' ? '₹500 per person' : '₹1,000 per person',
+          ticketPricing: budget === 'Cheap' ? '$2.50 per person' : budget === 'Moderate' ? '$6 per person' : '$12 per person',
           timeTravel: 'Morning (9:00 AM - 12:00 PM)',
           rating: '4.5'
         },
@@ -96,7 +96,7 @@ const generateDemoTrip = (location, days, traveler, budget) => {
           placeDetails: `Enjoy breathtaking sunset views and local cuisine at this popular evening destination.`,
           placeImageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400',
           geoCoordinates: { latitude: 28.6159, longitude: 77.2110 },
-          ticketPricing: budget === 'Cheap' ? '₹300 per person' : budget === 'Moderate' ? '₹600 per person' : '₹1,200 per person',
+          ticketPricing: budget === 'Cheap' ? '$3.75 per person' : budget === 'Moderate' ? '$7.50 per person' : '$15 per person',
           timeTravel: 'Evening (6:00 PM - 8:00 PM)',
           rating: '4.7'
         }

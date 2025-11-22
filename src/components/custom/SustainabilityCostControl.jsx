@@ -89,7 +89,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
     const days = parseInt(tripData?.userSelection?.noofDays) || 3;
     const travelers = tripData?.userSelection?.traveler || '1 Person';
     const numTravelers = parseInt(travelers.match(/\d+/)?.[0]) || 1;
-    const budgetAmount = tripData?.userSelection?.budgetAmount || 25000;
+    const budgetAmount = tripData?.userSelection?.budgetAmount || 300;
 
     const breakdown = {
       total: budgetAmount,
@@ -125,9 +125,9 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
       toast.error(
         <div>
           <p className="font-semibold">Budget Locked!</p>
-          <p className="text-sm">New suggestion: ₹{newAmount.toLocaleString()}</p>
+          <p className="text-sm">New suggestion: ${newAmount.toLocaleString()}</p>
           <p className="text-sm">Reason: {reason}</p>
-          <p className="text-xs mt-2">Unlock budget to accept changes</p>
+          <p className="mt-2 text-xs">Unlock budget to accept changes</p>
         </div>,
         { duration: 5000 }
       );
@@ -137,8 +137,8 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
   };
 
   const switchToGreenerOption = (alternative) => {
-    const currentBudget = costBreakdown?.total || 25000;
-    const transportCost = costBreakdown?.categories?.transport || 5000;
+    const currentBudget = costBreakdown?.total || 300;
+    const transportCost = costBreakdown?.categories?.transport || 60;
     
     let newTransportCost = transportCost;
     if (alternative.type === 'train') {
@@ -159,7 +159,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
       <div>
         <p className="font-semibold">Switched to {alternative.type}! 🌱</p>
         <p className="text-sm">CO₂ saved: {alternative.savings.toFixed(1)} kg</p>
-        <p className="text-sm">Money saved: ₹{savings.toFixed(0)}</p>
+        <p className="text-sm">Money saved: ${savings.toFixed(0)}</p>
       </div>,
       { duration: 4000 }
     );
@@ -185,7 +185,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
           <CardTitle className="flex items-center gap-2">
             <Leaf className="w-5 h-5 text-green-600" />
             Sustainability & Cost Transparency
-            <Badge variant="secondary" className="ml-auto bg-green-100 text-green-800">
+            <Badge variant="secondary" className="ml-auto text-green-800 bg-green-100">
               Eco-Friendly
             </Badge>
           </CardTitle>
@@ -195,10 +195,10 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
         </CardHeader>
       </Card>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-lg">
               <Leaf className="w-5 h-5 text-green-600" />
               Carbon Footprint
             </CardTitle>
@@ -206,22 +206,22 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
           <CardContent className="space-y-4">
             {carbonFootprint && (
               <>
-                <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:bg-orange-900/20 dark:border-orange-800">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       {getTransportIcon(carbonFootprint.current.type)}
-                      <span className="font-semibold text-gray-900 dark:text-gray-100 capitalize">
+                      <span className="font-semibold text-gray-900 capitalize dark:text-gray-100">
                         {carbonFootprint.current.type}
                       </span>
                     </div>
-                    <Badge variant="outline" className="bg-orange-100 text-orange-800">
+                    <Badge variant="outline" className="text-orange-800 bg-orange-100">
                       Current
                     </Badge>
                   </div>
                   <div className="text-2xl font-bold text-orange-600">
                     {carbonFootprint.current.co2kg} kg CO₂
                   </div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                  <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
                     ≈ {carbonFootprint.current.trees} trees needed to offset
                   </div>
                 </div>
@@ -245,23 +245,23 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
                     {showGreenerAlternative && carbonFootprint.alternatives.map((alt, idx) => (
                       <div
                         key={idx}
-                        className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800"
+                        className="p-3 border border-green-200 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-800"
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             {getTransportIcon(alt.type)}
-                            <span className="font-medium text-gray-900 dark:text-gray-100 capitalize">
+                            <span className="font-medium text-gray-900 capitalize dark:text-gray-100">
                               {alt.type}
                             </span>
                           </div>
-                          <Badge className="bg-green-600 text-white text-xs">
+                          <Badge className="text-xs text-white bg-green-600">
                             -{alt.savingsPercent}% CO₂
                           </Badge>
                         </div>
                         <div className="text-lg font-bold text-green-600">
                           {alt.co2kg.toFixed(1)} kg CO₂
                         </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                        <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
                           Saves {alt.savings.toFixed(1)} kg CO₂
                         </div>
                         <Button
@@ -277,7 +277,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
                   </div>
                 )}
 
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+                <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
                   <p className="text-xs text-blue-800 dark:text-blue-200">
                     💡 <strong>Tip:</strong> Choosing train or bus can reduce your carbon footprint by up to 80%!
                   </p>
@@ -289,7 +289,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-lg">
               <DollarSign className="w-5 h-5 text-blue-600" />
               Cost Breakdown
             </CardTitle>
@@ -297,10 +297,10 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
           <CardContent className="space-y-4">
             {costBreakdown && (
               <>
-                <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                  <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Budget</div>
+                <div className="p-4 border border-blue-200 rounded-lg bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800">
+                  <div className="mb-1 text-sm text-gray-600 dark:text-gray-400">Total Budget</div>
                   <div className="text-3xl font-bold text-blue-600">
-                    ₹{costBreakdown.total.toLocaleString()}
+                    ${costBreakdown.total.toLocaleString()}
                   </div>
                   <div className="flex items-center gap-2 mt-2">
                     <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -314,23 +314,23 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
                     Per Person Cost
                   </h4>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded">
+                    <div className="p-3 rounded bg-gray-50 dark:bg-gray-800">
                       <div className="text-xs text-gray-600 dark:text-gray-400">Total</div>
                       <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                        ₹{costBreakdown.perPerson.toLocaleString()}
+                        ${costBreakdown.perPerson.toLocaleString()}
                       </div>
                     </div>
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded">
+                    <div className="p-3 rounded bg-gray-50 dark:bg-gray-800">
                       <div className="text-xs text-gray-600 dark:text-gray-400">Per Day</div>
                       <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                        ₹{costBreakdown.perPersonPerDay.toLocaleString()}
+                        ${costBreakdown.perPersonPerDay.toLocaleString()}
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                  <h4 className="flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
                     <PieChart className="w-4 h-4" />
                     Category Breakdown
                   </h4>
@@ -339,14 +339,14 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
                     return (
                       <div key={category} className="space-y-1">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="capitalize text-gray-700 dark:text-gray-300">{category}</span>
+                          <span className="text-gray-700 capitalize dark:text-gray-300">{category}</span>
                           <span className="font-semibold text-gray-900 dark:text-gray-100">
-                            ₹{amount.toLocaleString()} ({percentage}%)
+                            ${amount.toLocaleString()} ({percentage}%)
                           </span>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="w-full h-2 bg-gray-200 rounded-full dark:bg-gray-700">
                           <div
-                            className="bg-blue-600 h-2 rounded-full"
+                            className="h-2 bg-blue-600 rounded-full"
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
@@ -362,7 +362,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Users className="w-5 h-5 text-purple-600" />
             Bill Split Calculator
           </CardTitle>
@@ -380,7 +380,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
                   >
                     -
                   </Button>
-                  <span className="w-12 text-center font-bold">{splitCount}</span>
+                  <span className="w-12 font-bold text-center">{splitCount}</span>
                   <Button
                     size="sm"
                     variant="outline"
@@ -393,23 +393,23 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Per Person</div>
+                <div className="p-4 border border-purple-200 rounded-lg bg-purple-50 dark:bg-purple-900/20 dark:border-purple-800">
+                  <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">Per Person</div>
                   <div className="text-2xl font-bold text-purple-600">
-                    ₹{Math.round(costBreakdown.total / splitCount).toLocaleString()}
+                    ${Math.round(costBreakdown.total / splitCount).toLocaleString()}
                   </div>
                 </div>
-                <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-1">Per Person/Day</div>
+                <div className="p-4 border border-purple-200 rounded-lg bg-purple-50 dark:bg-purple-900/20 dark:border-purple-800">
+                  <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">Per Person/Day</div>
                   <div className="text-2xl font-bold text-purple-600">
-                    ₹{Math.round(costBreakdown.total / splitCount / costBreakdown.days).toLocaleString()}
+                    ${Math.round(costBreakdown.total / splitCount / costBreakdown.days).toLocaleString()}
                   </div>
                 </div>
               </div>
 
-              <div className="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg">
+              <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20">
                 <p className="text-xs text-purple-800 dark:text-purple-200">
-                  💡 Each person pays ₹{Math.round(costBreakdown.total / splitCount).toLocaleString()} for the entire trip
+                  💡 Each person pays ${Math.round(costBreakdown.total / splitCount).toLocaleString()} for the entire trip
                 </p>
               </div>
             </>
@@ -419,18 +419,18 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             {budgetLocked ? <Lock className="w-5 h-5 text-red-600" /> : <Unlock className="w-5 h-5 text-green-600" />}
             Budget Lock Control
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
             <div>
               <div className="font-semibold text-gray-900 dark:text-gray-100">
                 Lock Budget
               </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
                 Prevent changes without approval
               </div>
             </div>
@@ -441,11 +441,11 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
           </div>
 
           {budgetLocked ? (
-            <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+            <div className="p-4 border border-red-200 rounded-lg bg-red-50 dark:bg-red-900/20 dark:border-red-800">
               <div className="flex items-start gap-2">
                 <Lock className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-red-800 dark:text-red-200">
-                  <p className="font-semibold mb-1">Budget Locked 🔒</p>
+                  <p className="mb-1 font-semibold">Budget Locked 🔒</p>
                   <p className="text-xs">
                     Any suggestions that exceed the current budget will require your approval. 
                     The system will show justification before making changes.
@@ -454,11 +454,11 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
               </div>
             </div>
           ) : (
-            <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+            <div className="p-4 border border-green-200 rounded-lg bg-green-50 dark:bg-green-900/20 dark:border-green-800">
               <div className="flex items-start gap-2">
                 <Unlock className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-green-800 dark:text-green-200">
-                  <p className="font-semibold mb-1">Budget Unlocked 🔓</p>
+                  <p className="mb-1 font-semibold">Budget Unlocked 🔓</p>
                   <p className="text-xs">
                     The system can make budget adjustments automatically to improve your trip.
                   </p>
@@ -467,7 +467,7 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
             </div>
           )}
 
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
+          <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20">
             <p className="text-xs text-blue-800 dark:text-blue-200">
               <strong>How it works:</strong> When locked, any AI suggestion that increases costs will show:
               <br />• New amount
@@ -478,12 +478,12 @@ const SustainabilityCostControl = ({ tripData, onBudgetUpdate }) => {
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 border-2 border-green-300">
+      <Card className="border-2 border-green-300 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20">
         <CardContent className="pt-4">
           <div className="flex items-start gap-2">
             <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
             <div className="text-sm text-gray-800 dark:text-gray-200">
-              <p className="font-semibold mb-2">Transparency Features Active:</p>
+              <p className="mb-2 font-semibold">Transparency Features Active:</p>
               <ul className="space-y-1 text-xs">
                 <li>✅ Carbon footprint calculated for all transport options</li>
                 <li>✅ Greener alternatives suggested with CO₂ savings</li>

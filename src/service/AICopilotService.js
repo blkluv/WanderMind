@@ -110,14 +110,14 @@ class AICopilotService {
 Generate a HYPER-COMPRESSED quick travel plan for someone who just landed.
 
 Location: ${location}
-Budget: ₹${budget}
+Budget: $${budget}
 Duration: ${duration}
 Urgency: IMMEDIATE (user just landed)
 
 Generate ONLY 2-3 KEY spots + 1-2 food options that are:
 1. Close to each other (minimize travel time)
 2. Can be covered in ${duration}
-3. Within ₹${budget} budget
+3. Within $${budget} budget
 4. Must-see/must-do only
 
 Format as JSON with:
@@ -127,11 +127,11 @@ Format as JSON with:
       "time": "Now - 2 hours",
       "spot": "Place name",
       "why": "One line reason",
-      "cost": "₹X",
+      "cost": "$X",
       "travel": "X mins"
     }
   ],
-  "totalCost": "₹X",
+  "totalCost": "$X",
   "totalTime": "X hours"
 }
 
@@ -164,25 +164,25 @@ Keep it MINIMAL and ACTIONABLE.`;
           time: 'Now - 2 hours',
           spot: `${location} Main Attraction`,
           why: 'Must-see landmark, close to airport/station',
-          cost: `₹${budgetPerSpot}`,
+          cost: `$${budgetPerSpot}`,
           travel: '15 mins'
         },
         {
           time: '2-3 hours',
           spot: 'Local Food Street',
           why: 'Authentic local cuisine experience',
-          cost: `₹${Math.floor(budgetPerSpot * 0.6)}`,
+          cost: `$${Math.floor(budgetPerSpot * 0.6)}`,
           travel: '10 mins'
         },
         {
           time: '3-5 hours',
           spot: `${location} Market/Shopping Area`,
           why: 'Quick shopping and local culture',
-          cost: `₹${Math.floor(budgetPerSpot * 0.8)}`,
+          cost: `$${Math.floor(budgetPerSpot * 0.8)}`,
           travel: '5 mins'
         }
       ],
-      totalCost: `₹${budget}`,
+      totalCost: `$${budget}`,
       totalTime: '5 hours'
     };
   }

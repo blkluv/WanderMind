@@ -22,23 +22,23 @@ function Transport({ trip }) {
     const budgetRanges = {
       budget: { 
         options: [
-          { type: 'Public Bus', priceRange: [50, 150], comfort: 'Basic' },
-          { type: 'Shared Taxi', priceRange: [200, 400], comfort: 'Standard' },
-          { type: 'Local Train', priceRange: [30, 100], comfort: 'Basic' }
+          { type: 'Public Bus', priceRange: [1, 2], comfort: 'Basic' },
+          { type: 'Shared Taxi', priceRange: [2, 5], comfort: 'Standard' },
+          { type: 'Local Train', priceRange: [0.5, 1.5], comfort: 'Basic' }
         ]
       },
       moderate: { 
         options: [
-          { type: 'AC Bus', priceRange: [150, 300], comfort: 'Comfortable' },
-          { type: 'Private Taxi', priceRange: [800, 1500], comfort: 'Premium' },
-          { type: 'Train (AC)', priceRange: [200, 500], comfort: 'Comfortable' }
+          { type: 'AC Bus', priceRange: [2, 4], comfort: 'Comfortable' },
+          { type: 'Private Taxi', priceRange: [10, 20], comfort: 'Premium' },
+          { type: 'Train (AC)', priceRange: [3, 6], comfort: 'Comfortable' }
         ]
       },
       luxury: { 
         options: [
-          { type: 'Private Car', priceRange: [2000, 4000], comfort: 'Luxury' },
-          { type: 'Flight', priceRange: [3000, 8000], comfort: 'Premium' },
-          { type: 'Luxury Bus', priceRange: [500, 1200], comfort: 'Luxury' }
+          { type: 'Private Car', priceRange: [25, 50], comfort: 'Luxury' },
+          { type: 'Flight', priceRange: [40, 100], comfort: 'Premium' },
+          { type: 'Luxury Bus', priceRange: [6, 15], comfort: 'Luxury' }
         ]
       }
     };
@@ -49,9 +49,9 @@ function Transport({ trip }) {
       const dailyBudget = userBudgetAmount / (days || 7);
       const transportBudget = dailyBudget * 0.15; // 15% for transport
       
-      if (transportBudget < 300) {
+      if (transportBudget < 4) {
         selectedRange = budgetRanges.budget;
-      } else if (transportBudget < 800) {
+      } else if (transportBudget < 10) {
         selectedRange = budgetRanges.moderate;
       } else {
         selectedRange = budgetRanges.luxury;
@@ -65,7 +65,7 @@ function Transport({ trip }) {
       
       return {
         transportType: option.type,
-        price: `₹${basePrice.toLocaleString()}`,
+        price: `$${basePrice.toLocaleString()}`,
         comfort: option.comfort,
         duration: duration,
         availability: availability,
@@ -148,23 +148,23 @@ function Transport({ trip }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-bold text-2xl text-gray-800 dark:text-gray-100">🚗 Transportation Options</h2>
-        <div className="text-sm text-gray-600 dark:text-gray-300 bg-green-50 dark:bg-green-900/30 px-3 py-1 rounded-full">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">🚗 Transportation Options</h2>
+        <div className="px-3 py-1 text-sm text-gray-600 rounded-full dark:text-gray-300 bg-green-50 dark:bg-green-900/30">
           {transportOptions.length} options • {budget} budget
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {transportOptions.map((transport, index) => (
           <div key={index} className="relative">
             <TransportCardItem transport={transport} />
             {index === 0 && (
-              <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute px-2 py-1 text-xs text-white bg-green-500 rounded-full -top-2 -right-2">
                 Best Value
               </div>
             )}
             {index === 1 && budget === 'moderate' && (
-              <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute px-2 py-1 text-xs text-white bg-blue-500 rounded-full -top-2 -right-2">
                 Recommended
               </div>
             )}
@@ -172,8 +172,8 @@ function Transport({ trip }) {
         ))}
       </div>
       
-      <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+      <div className="p-3 mt-3 rounded-lg bg-gray-50 dark:bg-gray-800">
+        <p className="text-sm text-center text-gray-600 dark:text-gray-300">
           💡 <strong>Tip:</strong> Book transportation in advance for better rates. Consider travel time when planning your itinerary.
         </p>
       </div>

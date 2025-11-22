@@ -19,20 +19,20 @@ const BudgetValidator = ({ destination, days, travelers, budget, onSuggestionAcc
     const budgetAmount = parseInt(budget) || 0;
 
     const minimumBudgets = {
-      'goa': 3000,
-      'mumbai': 3500,
-      'delhi': 3000,
-      'jaipur': 2500,
-      'kerala': 3200,
-      'manali': 3500,
-      'udaipur': 3000,
-      'agra': 2500,
-      'bangalore': 3200,
-      'hyderabad': 2800,
-      'pune': 2800,
-      'kolkata': 2600,
-      'chennai': 2800,
-      'default': 3000
+      'goa': 37,
+      'mumbai': 43,
+      'delhi': 37,
+      'jaipur': 31,
+      'kerala': 40,
+      'manali': 43,
+      'udaipur': 37,
+      'agra': 31,
+      'bangalore': 40,
+      'hyderabad': 35,
+      'pune': 35,
+      'kolkata': 32,
+      'chennai': 35,
+      'default': 37
     };
 
     const destKey = destination.toLowerCase();
@@ -68,7 +68,7 @@ const BudgetValidator = ({ destination, days, travelers, budget, onSuggestionAcc
         {
           type: 'increase',
           title: 'Increase Budget',
-          description: `Add ₹${(minimumRequired - budgetAmount).toLocaleString()} for comfortable trip`,
+          description: `Add $${(minimumRequired - budgetAmount).toLocaleString()} for comfortable trip`,
           savings: 0,
           icon: TrendingDown,
           action: () => onSuggestionAccept?.({ type: 'budget', value: minimumRequired })
@@ -98,7 +98,7 @@ const BudgetValidator = ({ destination, days, travelers, budget, onSuggestionAcc
                 Budget Looks Good!
               </h4>
               <p className="text-sm text-green-600 dark:text-green-400">
-                Your budget of ₹{validation.currentBudget.toLocaleString()} is sufficient for this trip
+                Your budget of ${validation.currentBudget.toLocaleString()} is sufficient for this trip
               </p>
             </div>
           </div>
@@ -116,20 +116,20 @@ const BudgetValidator = ({ destination, days, travelers, budget, onSuggestionAcc
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg">
-          <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+        <div className="p-4 bg-white rounded-lg dark:bg-gray-800">
+          <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
             <strong>{destination}</strong> typically needs a minimum of{' '}
-            <strong className="text-orange-600">₹{validation.minimumRequired.toLocaleString()}</strong>{' '}
+            <strong className="text-orange-600">${validation.minimumRequired.toLocaleString()}</strong>{' '}
             for {days} days with {travelers}.
           </p>
           <p className="text-sm text-orange-600 dark:text-orange-400">
-            Your current budget: ₹{validation.currentBudget.toLocaleString()}{' '}
-            (₹{validation.shortfall.toLocaleString()} short)
+            Your current budget: ${validation.currentBudget.toLocaleString()}{' '}
+            (${validation.shortfall.toLocaleString()} short)
           </p>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-3 text-gray-800 dark:text-gray-200">
+          <h4 className="mb-3 font-semibold text-gray-800 dark:text-gray-200">
             💡 Smart Alternatives:
           </h4>
           <div className="space-y-2">
@@ -137,7 +137,7 @@ const BudgetValidator = ({ destination, days, travelers, budget, onSuggestionAcc
               <Button
                 key={index}
                 variant="outline"
-                className="w-full justify-start h-auto p-4 hover:bg-orange-100 dark:hover:bg-orange-900/30"
+                className="justify-start w-full h-auto p-4 hover:bg-orange-100 dark:hover:bg-orange-900/30"
                 onClick={alt.action}
               >
                 <div className="flex items-start gap-3 text-left">
@@ -150,8 +150,8 @@ const BudgetValidator = ({ destination, days, travelers, budget, onSuggestionAcc
                       {alt.description}
                     </div>
                     {alt.savings > 0 && (
-                      <div className="text-xs text-green-600 dark:text-green-400 mt-1">
-                        Save ₹{alt.savings.toLocaleString()}
+                      <div className="mt-1 text-xs text-green-600 dark:text-green-400">
+                        Save ${alt.savings.toLocaleString()}
                       </div>
                     )}
                   </div>

@@ -12,7 +12,7 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
     {
       id: 1,
       type: 'bot',
-      content: "Hi! I'm your travel assistant. You can ask me to modify your trip like 'Add a day in Manali' or 'Reduce budget to ₹20K'. How can I help you refine your travel plan?",
+      content: "Hi! I'm your travel assistant. You can ask me to modify your trip like 'Add a day in Manali' or 'Reduce budget to $240'. How can I help you refine your travel plan?",
       timestamp: new Date()
     }
   ]);
@@ -268,14 +268,14 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
 
   return (
     <Card className="w-full mx-auto max-h-[80vh] flex flex-col">
-      <CardContent className="flex-1 flex flex-col p-3 sm:p-4 md:p-6">
+      <CardContent className="flex flex-col flex-1 p-3 sm:p-4 md:p-6">
         {/* Chat Header */}
-        <div className="border-b pb-3 mb-4">
-          <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2">
-            <Bot className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+        <div className="pb-3 mb-4 border-b">
+          <h3 className="flex items-center gap-2 text-base font-semibold sm:text-lg">
+            <Bot className="w-4 h-4 text-blue-500 sm:w-5 sm:h-5" />
             Travel Assistant
           </h3>
-          <p className="text-xs sm:text-sm text-gray-500">Refine your trip with natural language</p>
+          <p className="text-xs text-gray-500 sm:text-sm">Refine your trip with natural language</p>
         </div>
 
         {/* Messages */}
@@ -293,10 +293,10 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
                 }`}
               >
                 <div className="flex items-start gap-2">
-                  {message.type === 'bot' && <Bot className="w-3 h-3 sm:w-4 sm:h-4 mt-1 flex-shrink-0" />}
-                  {message.type === 'user' && <User className="w-3 h-3 sm:w-4 sm:h-4 mt-1 flex-shrink-0" />}
+                  {message.type === 'bot' && <Bot className="flex-shrink-0 w-3 h-3 mt-1 sm:w-4 sm:h-4" />}
+                  {message.type === 'user' && <User className="flex-shrink-0 w-3 h-3 mt-1 sm:w-4 sm:h-4" />}
                   <div className="flex-1">
-                    <div className="text-xs sm:text-sm whitespace-pre-line break-words">
+                    <div className="text-xs break-words whitespace-pre-line sm:text-sm">
                       {message.content && message.content.split('\n').map((line, index) => {
                         // Skip empty lines at the start
                         if (!line.trim() && index === 0) return null;
@@ -325,7 +325,7 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
           ))}
           {isLoading && (
             <div className="flex justify-start">
-              <div className="bg-gray-100 rounded-lg p-2 sm:p-3">
+              <div className="p-2 bg-gray-100 rounded-lg sm:p-3">
                 <div className="flex items-center gap-2">
                   <Bot className="w-3 h-3 sm:w-4 sm:h-4" />
                   <div className="flex space-x-1">
@@ -342,7 +342,7 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
 
         {/* Quick Suggestions */}
         <div className="mb-3 sm:mb-4">
-          <p className="text-xs sm:text-sm text-gray-500 mb-2">Quick suggestions:</p>
+          <p className="mb-2 text-xs text-gray-500 sm:text-sm">Quick suggestions:</p>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {quickSuggestions.map((suggestion, index) => (
               <Button
@@ -360,7 +360,7 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
 
         {/* Input Area */}
         <div className="flex gap-2">
-          <div className="flex-1 relative">
+          <div className="relative flex-1">
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
@@ -384,7 +384,7 @@ const ConversationalPlanner = ({ currentTrip, onTripUpdate }) => {
             onClick={handleSendMessage}
             disabled={isLoading || !inputMessage.trim()}
             size="sm"
-            className="h-9 sm:h-10 px-3 sm:px-4"
+            className="px-3 h-9 sm:h-10 sm:px-4"
           >
             <Send className="w-3 h-3 sm:w-4 sm:h-4" />
           </Button>

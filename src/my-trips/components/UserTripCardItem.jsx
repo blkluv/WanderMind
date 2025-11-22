@@ -18,7 +18,7 @@ function UserTripCardItem({ trip }) {
 
     // Try to show actual budget amount first
     if (budgetAmount && budgetAmount > 0) {
-      return `₹${parseInt(budgetAmount).toLocaleString()}`;
+      return `$${parseInt(budgetAmount).toLocaleString()}`;
     }
     
     // Try to extract amount from trip data or generate realistic amount based on budget type
@@ -36,19 +36,19 @@ function UserTripCardItem({ trip }) {
     let estimatedAmount = 0;
     switch(budget) {
       case 'budget':
-        estimatedAmount = days * peopleCount * 2500; // ₹2,500 per person per day
+        estimatedAmount = days * peopleCount * 30; // $30 per person per day
         break;
       case 'moderate':
-        estimatedAmount = days * peopleCount * 4500; // ₹4,500 per person per day
+        estimatedAmount = days * peopleCount * 55; // $55 per person per day
         break;
       case 'luxury':
-        estimatedAmount = days * peopleCount * 8000; // ₹8,000 per person per day
+        estimatedAmount = days * peopleCount * 100; // $100 per person per day
         break;
       default:
-        estimatedAmount = days * peopleCount * 4000; // Default moderate
+        estimatedAmount = days * peopleCount * 50; // Default moderate
     }
     
-    return `₹${estimatedAmount.toLocaleString()}`;
+    return `$${estimatedAmount.toLocaleString()}`;
   };
 
   const GetPlacePhoto = async () => {
@@ -71,7 +71,7 @@ function UserTripCardItem({ trip }) {
 
   return (
     <Link to={`/view-trip/${trip.id}`}>
-      <div className="hover:scale-105 cursor-pointer transition-all rounded-xl shadow-md bg-white dark:bg-gray-800 my-8">
+      <div className="my-8 transition-all bg-white shadow-md cursor-pointer hover:scale-105 rounded-xl dark:bg-gray-800">
         <img
           src={photoUrl ? photoUrl : "/header.png"}
           alt="Trip destination"
@@ -81,10 +81,10 @@ function UserTripCardItem({ trip }) {
           }}
         />
         <div>
-          <h2 className="font-bold text-xl mt-3 mx-4">
+          <h2 className="mx-4 mt-3 text-xl font-bold">
             {trip?.userSelection?.location?.label}
           </h2>
-          <h2 className="text-sm text-gray-600 mx-4 py-4">
+          <h2 className="py-4 mx-4 text-sm text-gray-600">
             {trip?.userSelection?.noofDays} Days trip with {formatBudgetDisplay(trip)}
           </h2>
         </div>
