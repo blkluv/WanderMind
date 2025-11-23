@@ -63,22 +63,22 @@ function Header() {
   };
 
   return (
-    <div className="p-3 shadow-sm flex items-center gap-2 px-5 flex-wrap sm:flex-nowrap bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-colors">
+    <div className="flex flex-wrap items-center gap-2 p-3 px-5 transition-colors bg-white border-b border-gray-200 shadow-sm sm:flex-nowrap dark:bg-gray-900 dark:border-gray-700">
       {/* Clickable Logo - Redirects to Home */}
-      <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer">
+      <a href="/" className="flex items-center gap-2 transition-opacity cursor-pointer hover:opacity-80">
         <AnimatedLogo className="w-8 h-8 sm:w-10 sm:h-10" />
         <h2 className="font-bold text-[20px] sm:text-[25px] md:text-[30px] text-[#2196f3] dark:text-[#42a5f5]">
-          Wander<span className="text-gray-900 dark:text-white">Mind</span>
+          IRL.<span className="text-gray-900 dark:text-white">TRAVEL</span>
         </h2>
       </a>
-      <div className="ml-auto flex items-center gap-3">
+      <div className="flex items-center gap-3 ml-auto">
         {/* Quick Feature Access - Hidden on mobile */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="items-center hidden gap-2 lg:flex">
           <Button 
             variant="outline" 
             size="sm"
             onClick={() => window.location.href = '/create-trip?tab=inspire'}
-            className="text-xs bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
+            className="text-xs text-gray-700 bg-white border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
           >
             🎯 Inspire Me
           </Button>
@@ -86,7 +86,7 @@ function Header() {
             variant="outline" 
             size="sm"
             onClick={() => window.location.href = '/create-trip?tab=persona'}
-            className="text-xs bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
+            className="text-xs text-gray-700 bg-white border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
           >
             🤖 AI Plan
           </Button>
@@ -98,13 +98,13 @@ function Header() {
         {user ? (
           <div className="flex items-center gap-2 sm:gap-3">
             <a href="/create-trip">
-              <Button variant="outline" className="rounded-full text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
+              <Button variant="outline" className="px-2 py-1 text-xs rounded-full sm:text-sm sm:px-4 sm:py-2">
                 <span className="hidden sm:inline">+ Create Trip</span>
                 <span className="sm:hidden">+ Trip</span>
               </Button>
             </a>
             <a href="/my-trips" className="hidden sm:block">
-              <Button variant="outline" className="rounded-full text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
+              <Button variant="outline" className="px-2 py-1 text-xs rounded-full sm:text-sm sm:px-4 sm:py-2">
                 My Trips
               </Button>
             </a>
@@ -143,7 +143,7 @@ function Header() {
             onClick={() => {
               setOpenDialog(true);
             }}
-            className="text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2"
+            className="px-3 py-1 text-xs sm:text-sm sm:px-4 sm:py-2"
           >
             Sign In
           </Button>
@@ -157,22 +157,22 @@ function Header() {
             <DialogTitle className="sr-only">Sign In</DialogTitle>
             <DialogDescription>
               <div className="flex items-center justify-center gap-3 mb-6">
-                <AnimatedLogo className="h-10 w-12" />
+                <AnimatedLogo className="w-12 h-10" />
                 <h2 className="font-bold text-2xl text-[#2196f3] dark:text-[#42a5f5]">
-                  Wander<span className="text-gray-900 dark:text-white">Mind</span>
+                  IRL.<span className="text-gray-900 dark:text-white">TRAVEL</span>
                 </h2>
               </div>
-              <h2 className="font-bold text-xl mt-5 text-gray-900 dark:text-white text-center">
+              <h2 className="mt-5 text-xl font-bold text-center text-gray-900 dark:text-white">
                 Sign In With Google
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 text-center mt-2">
+              <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
                 Sign in to the app with secure Google authentication.
               </p>
               <Button
                 onClick={login}
-                className="mt-6 w-full flex gap-4 items-center justify-center bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white dark:border-gray-600 py-3 rounded-lg transition-all"
+                className="flex items-center justify-center w-full gap-4 py-3 mt-6 text-gray-900 transition-all bg-white border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white dark:border-gray-600"
               >
-                <FcGoogle className="h-6 w-6" />
+                <FcGoogle className="w-6 h-6" />
                 <span className="font-semibold">Sign In With Google</span>
               </Button>
             </DialogDescription>

@@ -2,28 +2,28 @@ export const SelectTravelsList = [
   {
     id: 1,
     title: 'Solo Traveler',
-    desc: 'A sole travels in exploration',
+    desc: 'A sole traveler in exploration',
     icon: '🪙',
     people: '1',
   },
   {
     id: 2,
     title: 'A Couple',
-    desc: 'Two travels in tandem',
+    desc: 'Two travelers in tandem',
     icon: '🥂',
     people: '2 People',
   },
   {
     id: 3,
     title: 'Family',
-    desc: 'A group of fun-loving adv',
+    desc: 'A group of fun-loving adventurers',
     icon: '🏠',
     people: '3 to 5 People',
   },
   {
     id: 4,
     title: 'Friends',
-    desc: 'An adventure to lifelong',
+    desc: 'An adventure to lifelong memories',
     icon: '🤝',
     people: '5 to 10 People',
   },
@@ -34,42 +34,42 @@ export const TravelPersonas = [
   {
     id: 1,
     title: 'Heritage Explorer',
-    desc: 'Discover historical sites, museums, and cultural landmarks',
+    desc: 'Discover historical sites, museums, and cultural landmarks worldwide',
     icon: '🏛️',
-    keywords: 'heritage, history, museums, monuments, cultural sites, temples, forts'
+    keywords: 'heritage, history, museums, monuments, cultural sites, temples, castles'
   },
   {
     id: 2,
     title: 'Adventure Seeker',
-    desc: 'Thrilling activities, trekking, and outdoor adventures',
+    desc: 'Thrilling activities, trekking, and outdoor adventures across the globe',
     icon: '🏔️',
     keywords: 'adventure, trekking, hiking, rafting, paragliding, rock climbing, camping'
   },
   {
     id: 3,
     title: 'Luxury Nomad',
-    desc: 'Premium experiences, fine dining, and luxury stays',
+    desc: 'Premium experiences, fine dining, and luxury stays worldwide',
     icon: '💎',
     keywords: 'luxury, premium, fine dining, spa, resort, high-end shopping, exclusive'
   },
   {
     id: 4,
     title: 'Nightlife Enthusiast',
-    desc: 'Bars, clubs, live music, and vibrant nightlife',
+    desc: 'Bars, clubs, live music, and vibrant nightlife in global cities',
     icon: '🌃',
     keywords: 'nightlife, bars, clubs, live music, pubs, rooftop, party, entertainment'
   },
   {
     id: 5,
     title: 'Nature Lover',
-    desc: 'Wildlife, national parks, and scenic landscapes',
+    desc: 'Wildlife, national parks, and scenic landscapes around the world',
     icon: '🌿',
     keywords: 'nature, wildlife, national parks, forests, lakes, mountains, beaches'
   },
   {
     id: 6,
     title: 'Food Explorer',
-    desc: 'Local cuisine, street food, and culinary experiences',
+    desc: 'Local cuisine, street food, and culinary experiences globally',
     icon: '🍜',
     keywords: 'food, cuisine, street food, local dishes, restaurants, cooking classes'
   }
@@ -84,27 +84,29 @@ export const TravelThemes = [
   { id: 5, name: 'Nature & Wildlife', icon: '🌿' },
   { id: 6, name: 'Food & Culinary', icon: '🍜' },
   { id: 7, name: 'Shopping & Markets', icon: '🛍️' },
-  { id: 8, name: 'Photography & Scenic', icon: '📸' }
+  { id: 8, name: 'Photography & Scenic', icon: '📸' },
+  { id: 9, name: 'Urban Exploration', icon: '🏙️' },
+  { id: 10, name: 'Beach & Coastal', icon: '🏖️' }
 ];
 
 export const SelectBudgetOptions = [
   {
     id: 1,
-    title: 'Cheap',
-    desc: 'Stay conscious of costs',
+    title: 'Budget',
+    desc: 'Cost-conscious travel with local experiences',
     icon: '💵',
   },
   {
     id: 2,
     title: 'Moderate',
-    desc: 'Keep cost on the average side',
+    desc: 'Balanced comfort and value',
     icon: '💰',
   },
   {
     id: 3,
     title: 'Luxury',
-    desc: 'Don\'t worry about cost',
-    icon: '💸',
+    desc: 'Premium experiences without compromise',
+    icon: '💎',
   },
 ];
 
@@ -121,7 +123,8 @@ export const AI_PROMPT = `
   - Cultural heritage insights and multilingual support
   - Seamless booking integration readiness
   
-  CRITICAL: Focus on India destinations with authentic experiences, local culture, and budget optimization.
+  CRITICAL: Provide authentic local experiences and cultural insights specific to {location}.
+  Consider local customs, peak seasons, visa requirements, and regional travel advisories.
   
   Return comprehensive JSON with booking-ready information:
   {
@@ -129,21 +132,22 @@ export const AI_PROMPT = `
       "tripId": "string",
       "destination": "string",
       "duration": "{totalDays} days",
-      "totalBudget": "${amount}",
+      "totalBudget": "{budget}",
       "budgetCategory": "{budget}",
       "travelPersona": "{persona}",
       "themes": ["{themes}"],
       "generatedAt": "timestamp",
       "adaptiveScore": number,
-      "bookingReadiness": boolean
+      "bookingReadiness": boolean,
+      "destinationType": "beach|city|mountain|countryside|island|desert"
     },
     "smartBudgetBreakdown": {
-      "accommodation": {"amount": "$string", "percentage": number, "bookingOptions": ["string"]},
-      "transport": {"amount": "$string", "percentage": number, "modes": ["string"]},
-      "food": {"amount": "$string", "percentage": number, "categories": ["string"]},
-      "activities": {"amount": "$string", "percentage": number, "experiences": ["string"]},
-      "shopping": {"amount": "$string", "percentage": number},
-      "emergency": {"amount": "$string", "percentage": number},
+      "accommodation": {"amount": "string", "percentage": number, "bookingOptions": ["string"]},
+      "transport": {"amount": "string", "percentage": number, "modes": ["string"]},
+      "food": {"amount": "string", "percentage": number, "categories": ["string"]},
+      "activities": {"amount": "string", "percentage": number, "experiences": ["string"]},
+      "shopping": {"amount": "string", "percentage": number},
+      "emergency": {"amount": "string", "percentage": number},
       "optimizationTips": ["string"]
     },
     "accommodationOptions": [
@@ -152,8 +156,8 @@ export const AI_PROMPT = `
         "name": "string",
         "category": "budget|moderate|luxury",
         "address": "string",
-        "pricePerNight": "$string",
-        "totalCost": "$string",
+        "pricePerNight": "string",
+        "totalCost": "string",
         "rating": number,
         "amenities": ["string"],
         "geoCoordinates": {"lat": number, "lng": number},
@@ -177,7 +181,7 @@ export const AI_PROMPT = `
             "location": "string",
             "description": "string",
             "duration": "string",
-            "cost": "$string",
+            "cost": "string",
             "category": "heritage|adventure|culture|food|shopping|nature",
             "geoCoordinates": {"lat": number, "lng": number},
             "imageUrl": "string",
@@ -193,7 +197,7 @@ export const AI_PROMPT = `
         ],
         "transportPlan": {
           "mode": "string",
-          "cost": "$string",
+          "cost": "string",
           "duration": "string",
           "bookingDetails": "string"
         },
@@ -202,12 +206,12 @@ export const AI_PROMPT = `
             "meal": "breakfast|lunch|dinner|snacks",
             "restaurant": "string",
             "cuisine": "string",
-            "cost": "$string",
+            "cost": "string",
             "location": "string",
             "speciality": "string"
           }
         ],
-        "dayBudget": "$string",
+        "dayBudget": "string",
         "emergencyContacts": ["string"]
       }
     ],
@@ -218,7 +222,7 @@ export const AI_PROMPT = `
         "description": "string",
         "location": "string",
         "bestTime": "string",
-        "cost": "$string",
+        "cost": "string",
         "localSecret": "string",
         "geoCoordinates": {"lat": number, "lng": number}
       }
@@ -246,20 +250,20 @@ export const AI_PROMPT = `
       "emergencyPlans": ["string"]
     },
     "bookingSummary": {
-      "totalCost": "$string",
+      "totalCost": "string",
       "bookableItems": [
         {
           "type": "accommodation|transport|activity",
           "name": "string",
-          "cost": "$string",
+          "cost": "string",
           "bookingUrl": "string",
           "priority": "high|medium|low"
         }
       ],
       "paymentBreakdown": {
-        "immediate": "$string",
-        "onArrival": "$string",
-        "flexible": "$string"
+        "immediate": "string",
+        "onArrival": "string",
+        "flexible": "string"
       }
     },
     "shareableContent": {
@@ -287,10 +291,11 @@ export const CHAT_REFINEMENT_PROMPT = `
   
   Common requests:
   - "Add a day in [location]"
-  - "Reduce budget to $[amount]"
+  - "Reduce budget to [amount]"
   - "Remove [activity/place]"
   - "Make it more [adventurous/relaxing/cultural]"
   - "Find cheaper alternatives"
+  - "Add [specific activity/landmark]"
   
   Return JSON with the modifications needed.
 `;
@@ -300,12 +305,14 @@ export const BUDGET_PREDICTOR_PROMPT = `
   Predict the ideal budget for a trip to {destination} for {days} days with {travelers} travelers.
   
   Consider:
+  - Destination cost of living and tourism prices
   - Accommodation costs (budget/moderate/luxury)
   - Food expenses (local/mid-range/fine dining)
-  - Transportation (local transport, intercity)
+  - Transportation (local transport, intercity, flights if applicable)
   - Activities and attractions
   - Shopping and miscellaneous
   - Seasonal price variations
+  - Currency exchange rates
   
-  Provide budget ranges in USD for different comfort levels.
+  Provide budget ranges in USD for different comfort levels with regional considerations.
 `;

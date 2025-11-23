@@ -1017,7 +1017,7 @@ function CreateTrip() {
                     fontSize: "25px",
                   }}
                 >
-                  Wander<span className="text-[#000000]">Mind</span>
+                  IRL.<span className="text-[#000000]">TRAVEL</span>
                 </h2>
               </div>
               <h2 className="mt-5 text-lg font-bold">Sign In With Google</h2>
